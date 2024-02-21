@@ -36,18 +36,6 @@ const DrPatho = styled.h1`
     }
 `;
 
-const HamburgerIcon = styled.div`
-    display: none; // Hidden by default
-
-    @media (max-width: 768px) {
-        display: block; // Displayed for mobile view
-        cursor: pointer;
-        font-size: 2rem;
-        color: white;
-        // Add styling for your hamburger icon, e.g., three horizontal lines
-    }
-`;
-
 const Header = () => {
     return (
         <HeaderContainer>
@@ -56,7 +44,7 @@ const Header = () => {
                     <DrPatho>Dr.Patho</DrPatho>
                 </DrPathoContainer>
                 <Navbar />
-                <HamburgerIcon>&#9776;</HamburgerIcon>
+                {/* Hamburger icon removed completely */}
             </MainHeader>
         </HeaderContainer>
     );

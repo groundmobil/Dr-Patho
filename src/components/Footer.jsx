@@ -12,8 +12,7 @@ const Footer = () => {
           fontSize: "18px",
           fontFamily: "Roboto, sans-serif",
           backgroundColor: "#000080",
-          marginTop: "-53px",
-          overflow: "hidden", // Add this to hide the overflow
+          marginTop: "-25px",
         }}
       >
         <h2>Our Lab Partners</h2>
