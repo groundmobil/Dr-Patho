@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AboutUs from "./AboutUs";
+import Footer from "./components/Footer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Home = () => {
       </div>
       
       <AboutUs />
+      <Footer />
     </div>
   );
 }

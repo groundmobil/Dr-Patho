@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Home from "./Home";
 import AboutUs from "./AboutUs";
 import Login from "./Login";
@@ -46,7 +45,7 @@ const App = () => {
             <Route path="/BookNow" element={<BookNow />} />
             <Route path="/Profile" element={<Profile />} />
           </Routes>
-          <Footer />
+          
         </BrowserRouter>
       </div>
     </ThemeProvider>

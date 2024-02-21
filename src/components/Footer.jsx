@@ -17,7 +17,7 @@ const Footer = () => {
       >
         <h2>Our Lab Partners</h2>
         <img
-          src="/Images/partner.jpg"
+          src="/Images/partnerfinal.jpg"
           style={{
             maxWidth: "100%",
             height: "auto",

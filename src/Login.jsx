@@ -438,7 +438,7 @@ const App = () => {
               onChange={() => handleCheckboxChange("agree1")}
               style={{ marginRight: 10 }}
             />
-            i agree to receive communication through SMS, email, or Whatsapp regarding my booking
+            I agree to receive communication through SMS, email, or Whatsapp regarding my booking
           </label>
           <br />
 
@@ -450,7 +450,7 @@ const App = () => {
               onChange={() => handleCheckboxChange("agree2")}
               style={{ marginRight: 10 }}
             />
-            receive latest offers & discounts through SMS, email, or Whatsapp
+            Receive latest offers & discounts through SMS, email, or Whatsapp
           </label>
 
           <br />

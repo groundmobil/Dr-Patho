@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const Profile = () => {
   const [activeOption, setActiveOption] = useState("Your Account");
   const [rating, setRating] = useState(0);
@@ -232,7 +233,7 @@ const Profile = () => {
         )}
       </div>
     </div>
+    
   );
 };
-
 export default Profile;
