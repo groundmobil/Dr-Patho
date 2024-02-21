@@ -41,7 +41,7 @@ const AboutUs = () => {
     color: 'white',
     padding: '20px',
     textAlign: 'center',
-    marginTop: '-30px',
+    marginTop: '-15px',
   };
 
   const sectionStyle = {
