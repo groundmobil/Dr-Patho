@@ -339,9 +339,10 @@ const App = () => {
         {!showOtpInput ? (
           <form onSubmit={handlePhoneSubmit}>
             <input
-              type="text"
+              type="tel "
               className="phonefield"
               value={phoneNumber}
+              maxLength={10}
               onChange={handlePhoneNumber}
               placeholder="Enter Mobile Number"
               style={{
