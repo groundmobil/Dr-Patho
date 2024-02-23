@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LabDetailsPopup from './LabDetailsPopup'; // Adjust the import based on your project structure
+import LabDetailsPopup from './LabDetailsPopup'; 
 
 const TestDetailsPopup = ({ onClose }) => {
   const [addedToCart, setAddedToCart] = useState(Array(12).fill(false));
@@ -57,7 +57,7 @@ const TestDetailsPopup = ({ onClose }) => {
           ))}
           <button
             onClick={openLabDetails}
-            disabled={!isAnyTestSelected} // Disable the button if no test is selected
+            disabled={!isAnyTestSelected} 
             style={{
               gridColumn: "span 6", marginTop: "-4px", background: "blue", color: "#fff", fontSize: "15px", padding: "8px 10px", width: "120px", justifySelf: "end", borderRadius: "40px",
             }}

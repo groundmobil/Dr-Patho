@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+
 const LabDetailsPopup = ({ onClose }) => {
   const [isAddedToCartArray, setIsAddedToCartArray] = useState(new Array(5).fill(false));
   const [selectedLabs, setSelectedLabs] = useState([]);

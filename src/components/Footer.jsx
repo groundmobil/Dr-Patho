@@ -2,39 +2,83 @@ import React from "react";
 import { FaInstagram, FaYoutube, FaTwitter, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
-  return (
-    <div>
-      <div
-        style={{
+return (
+<div>
+   <div
+        style={{ 
           position: "relative",
           textAlign: "center",
-          color: "white",
+          color: "#fefefe",
           fontSize: "18px",
           fontFamily: "Roboto, sans-serif",
-          backgroundColor: "#000080",
-          marginTop: "-25px",
+          backgroundColor: "#104c94",
+
+          overflow: "hidden", 
         }}
       >
         <h2>Our Lab Partners</h2>
-        <img
-          src="/Images/partnerfinal.jpg"
+          <div
           style={{
-            maxWidth: "100%",
-            height: "auto",
-            animation: "moveLeftRight 10s linear infinite", 
+            overflow: 'hidden',
+            position: 'relative',
+            whiteSpace: 'nowrap',
+            background: '#FFFFFF'
           }}
-        />
+          >
+            <div
+          style={{
+            overflow: 'hidden',
+            position: 'relative',
+            display: 'inline-block',
+            animation: 'slideshow 13s linear infinite',
+            whiteSpace: 'nowrap'
+          
+          }}
+          >
+          <img src="/Images/partners/final.jpg" 
+          style = {{
+          height: '75px',
+          width: 'auto',
+          paddingTop: '15px',
+            paddingBottom: '15px',
+          }}
+          />
+          
+          </div>
+          <div
+          style={{
+            overflow: 'hidden',
+            position: 'relative',
+            display: 'inline-block',
+            animation: 'slideshow 13s linear infinite',
+            whiteSpace: 'nowrap'
+            
+          }}
+          >
+          <img src="/Images/partners/final.jpg" 
+          style = {{ 
+            paddingTop: '15px',
+            paddingBottom: '15px',
+          height: '75px',
+          width: 'auto',
+          }}
+          />
+          
+          </div>
+          
+          </div>
+          
+
+          
+    
+        
       </div>
 
       <style>
         {`
-          @keyframes moveLeftRight {
-            0% {
-              transform: translateX(-100%); // Start from the right
-            }
-            100% {
-              transform: translateX(100%); // Move to the left
-            }
+          @keyframes slideshow {
+            from    { transform: translateX(0%); }
+            to  { transform: translateX(-100%); }
           }
         `}
       </style>
@@ -45,6 +89,7 @@ const Footer = () => {
           justifyContent: "space-around",
           borderSpacing: "0",
           margin: "0 auto",
+          whiteSpace: 'nowrap'
         }}
       >
         <div
@@ -68,7 +113,7 @@ const Footer = () => {
             <li>- Pune</li>
             <li>- Mumbai</li>
             <li>- Delhi</li>
-            <li>- Banglore</li>
+            <li>- Bangalore</li> 
           </ul>
         </div>
 
@@ -84,7 +129,7 @@ const Footer = () => {
         >
           <img
             src="/Images/logo.jpg"
-            style={{ maxWidth: "100%", height: "100%" }}
+            style={{ maxWidth: "100%", height: "100%", borderRadius:'18px' }}
           />
         </div>
 
