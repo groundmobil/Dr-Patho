@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import { useNavigate } from "react-router-dom";
 
 const LabDetailsPopup = ({ onClose }) => {
+  const navigate = useNavigate();
   const [isAddedToCartArray, setIsAddedToCartArray] = useState(new Array(5).fill(false));
   const [selectedLabs, setSelectedLabs] = useState([]);
 
@@ -37,6 +38,14 @@ const LabDetailsPopup = ({ onClose }) => {
   };
 
   const isCheckoutEnabled = selectedLabs.length > 0;
+
+  const handleCheckoutClick = () => {
+    if (isCheckoutEnabled) {
+      console.log('Checkout clicked with selected labs:', selectedLabs);
+      // Implement your checkout logic here
+      navigate("/MyCart"); // Navigate to "MyCart" on checkout
+    }
+  };
 
   return (
     <div className="popup-container">
@@ -96,12 +105,7 @@ const LabDetailsPopup = ({ onClose }) => {
             Back
           </button>
           <button
-            onClick={() => {
-              if (isCheckoutEnabled) {
-                console.log('Checkout clicked with selected labs:', selectedLabs);
-                // Implement your checkout logic here
-              }
-            }}
+            onClick={handleCheckoutClick}
             disabled={!isCheckoutEnabled}
             style={{
               background: isCheckoutEnabled ? 'blue' : '#ccc',
