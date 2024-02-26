@@ -8,6 +8,9 @@ import Login from "./Login";
 import MyCart from "./MyCart";
 import BookNow from "./BookNow";
 import Profile from "./Profile";
+import LabDetailsPopup from "./LabDetailsPopup";
+import TestDetailsPopup from "./TestDetailsPopup";
+import Checkout from "./Checkout";
 
 const App = () => {
   const theme = {
@@ -44,6 +47,9 @@ const App = () => {
             <Route path="/MyCart" element={<MyCart />} />
             <Route path="/BookNow" element={<BookNow />} />
             <Route path="/Profile" element={<Profile />} />
+            <Route path="/LabDetailsPopup" element={<LabDetailsPopup />} />
+            <Route path="/TestDetailsPopup" element={<TestDetailsPopup />} />
+            <Route path="/Checkout" element={<Checkout />} />
           </Routes>
           
         </BrowserRouter>
