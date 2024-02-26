@@ -1,28 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
+
 
 const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [landmark, setLandmark] = useState("");
 
+  const navigate = useNavigate(); 
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validate if all input fields are filled
-    if (!pinCode || !address || !city || !state || !landmark) {
+    if (!pinCode || !address || !city || !state) {
       alert("Please fill in all address details.");
       return;
     }
 
-    onAddressSubmit({ pinCode, address, city, state, landmark });
+
+    onAddressSubmit({ pinCode, address, city, state });
     setPinCode("");
     setAddress("");
     setCity("");
     setState("");
-    setLandmark("");
     onClose();
+
+    navigate('/BookNow');
   };
 
   const modalStyle = {
@@ -101,13 +107,7 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
             onChange={(e) => setAddress(e.target.value)}
             style={{ ...inputStyle, width: "80%", marginRight: 0 }}
           />
-           <input
-            type="text"
-            placeholder="Landmark"
-            value={landmark}
-            onChange={(e) => setLandmark(e.target.value)}
-            style={{ ...inputStyle, width: "80%", marginRight: 0 }}
-          />
+
           <button type="submit" style={submitButtonStyle}>Done</button>
         </form>
       </div>
@@ -116,8 +116,7 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
 };
 
 const PersonalInfo = ({ onSubmit, onClose }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
@@ -125,14 +124,13 @@ const PersonalInfo = ({ onSubmit, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!firstName || !lastName || !Email || !dob || !gender) {
+    if (!Name || !Email || !dob || !gender) {
       alert("Please fill in all personal information.");
       return;
     }
 
-    onSubmit({ firstName, lastName, Email, dob, gender });
-    setFirstName("");
-    setLastName("");
+    onSubmit({ Name, Email, dob, gender });
+    setName("");
     setEmail("");
     setDob("");
     setGender("");
@@ -186,16 +184,9 @@ const PersonalInfo = ({ onSubmit, onClose }) => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            style={inputStyle}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Name"
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
             style={inputStyle}
           />
           <input
@@ -238,7 +229,7 @@ const App = () => {
   const [showAddressPopup, setShowAddressPopup] = useState(false);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
-
+  
   const handlePhoneNumber = (event) => {
     setPhoneNumber(event.target.value);
   };
