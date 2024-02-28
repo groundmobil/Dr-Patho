@@ -437,20 +437,20 @@ const Checkout = () => {
             10:00-11:00am
           </button>
           <button
-            className={`transparent-button ${selectedTimeSlot === '12-1pm' ? 'selected' : ''}`}
-            onClick={() => setSelectedTimeSlot('12-1pm')}
+            className={`transparent-button ${selectedTimeSlot === '11-12pm' ? 'selected' : ''}`}
+            onClick={() => setSelectedTimeSlot('11-12pm')}
           >
-            12:00-1:00pm
+            11:00-12:00pm
           </button>
         </div>
 
         <h3>Evening Slots</h3>
         <div className="time-slot-buttons">
           <button
-            className={`transparent-button ${selectedTimeSlot === '4-6pm' ? 'selected' : ''}`}
-            onClick={() => setSelectedTimeSlot('4-6pm')}
+            className={`transparent-button ${selectedTimeSlot === '4-5pm' ? 'selected' : ''}`}
+            onClick={() => setSelectedTimeSlot('4-5pm')}
           >
-            4:00-6:00pm
+            4:00-5:00pm
           </button>
           <button
             className={`transparent-button ${selectedTimeSlot === '5-6pm' ? 'selected' : ''}`}
