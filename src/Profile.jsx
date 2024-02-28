@@ -198,39 +198,59 @@ const Profile = () => {
           </div>
         )}
 
-        {activeOption === "Rate Us" && (
-          <div>
-            <div>
-              <div style={{ textAlign: "center", display: "flex", justifyContent: "center" }}>
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <span
-                    key={star}
-                    style={{ cursor: "pointer", fontSize: "50px", color: star <= rating ? "#ffc107" : "#ccc" }}
-                    onClick={() => handleStarClick(star)}
-                  >
-                    &#9733;
-                  </span>
-                ))}
-              </div>
-            </div>
-            <textarea
-              rows="7"
-              cols="70"
-              style={{ padding: "5px 10px", fontSize: "18px", borderRadius: "30px", textAlign: "center", display: "block", margin: "auto" }}
-              placeholder="Write your review here..."
-              value={review}
-              onChange={handleReviewChange}
-            ></textarea>
-            <div style={{ marginTop: "10px" }}>
-              <button
-                style={{ padding: "10px 20px", fontSize: "18px", backgroundColor: "#007BFF", color: "white", borderRadius: "70px", cursor: "pointer", textAlign: "center", display: "block", margin: "auto" }}
-                onClick={handleReviewSubmit}
-              >
-                Submit Review
-              </button>
-            </div>
-          </div>
-        )}
+{activeOption === "Rate Us" && (
+  <div>
+    <div>
+      <div style={{ textAlign: "center", display: "flex", justifyContent: "center" }}>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            style={{ cursor: "pointer", fontSize: "50px", color: star <= rating ? "#ffc107" : "#ccc" }}
+            onClick={() => handleStarClick(star)}
+          >
+            &#9733;
+          </span>
+        ))}
+      </div>
+    </div>
+    <textarea
+      rows="7"
+      cols="70"
+      style={{
+        padding: "5px 10px",
+        fontSize: "18px",
+        borderRadius: "30px",
+        textAlign: "center",
+        display: "block",
+        margin: "auto",
+        resize: "none", // Prevents resizing
+      }}
+      placeholder="Write your review here..."
+      value={review}
+      onChange={handleReviewChange}
+    ></textarea>
+    <div style={{ marginTop: "10px" }}>
+      <button
+        style={{
+          padding: "10px 20px",
+          fontSize: "18px",
+          backgroundColor: "#007BFF",
+          color: "white",
+          borderRadius: "70px",
+          cursor: "pointer",
+          textAlign: "center",
+          display: "block",
+          margin: "auto",
+        }}
+        onClick={handleReviewSubmit}
+      >
+        Submit Review
+      </button>
+    </div>
+  </div>
+)}
+
+        
       </div>
     </div>
     

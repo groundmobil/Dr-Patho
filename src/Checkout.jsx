@@ -7,6 +7,10 @@ const Checkout = () => {
   const [step, setStep] = useState(1);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [address, setAddress] = useState('Your Address'); // State to hold the address
+  const [originalAddress, setOriginalAddress] = useState('');
+
 
   const handleNext = () => {
     if (step < steps.length) {
@@ -22,6 +26,37 @@ const Checkout = () => {
   const handleDateSelection = (date) => {
     setSelectedDate((prevDate) => (prevDate === date ? null : date));
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleChangeAddress = (newAddress) => {
+   
+
+       handleCloseModal();
+       window.alert('Address changed successfully!');
+
+  };
+
+  const handleOpenModal = () => {
+    // Store the current address as the original address
+    setOriginalAddress(address);
+    
+    // Open the modal
+    setShowModal(true);
+  };
+  
+  const handleCancelAddressChange = () => {
+    // Reset the address in case any changes were made
+    setAddress(originalAddress); // Assuming you have stored the original address in state
+    
+    // Close the modal
+    setShowModal(false); // Set showModal to false to close the modal
+  };
+  
+  
+
 
   return (
     <div>
@@ -148,6 +183,124 @@ const Checkout = () => {
       margin-top: 20px; /* Add margin for spacing */
       text-align: center; /* Center the buttons horizontally */
     }
+
+    .edit-address {
+      border-radius: 20px;
+      padding: 40px;
+      border: 2px solid #ddd; /* Add border style */
+      background-color: white; /* Set background color */
+      width: 80%; /* Set width to your preference */
+      margin-top:50px;
+      margin-left:10px;
+      font-family: Arial, sans-serif; /* Change the font family */
+      font-size: 16px;
+
+
+    }
+    
+    .step-title1 {
+      background-color: transparent;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 5px;
+      border: 2px solid #007bff;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 550px;
+      height: 350px;
+  }
+
+    .modal {
+      display: ${showModal ? 'flex' : 'none'}; 
+      position: fixed; 
+      z-index: 1; /* Ensure it appears above other content */
+      left: 0;
+      top: 0;
+      align-items: center; /* Center vertically */
+      justify-content: center;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow-wrap: break-word; /* Enable scrolling if needed */
+     
+    }
+    
+    .modal-content {
+      background-color: #F0FFFF		; /* White background */
+      margin: auto; /* Center horizontally and vertically */
+      padding: 15px;
+      border: 1px solid #888;
+      width: 400px; /* Adjust the width to your preference */
+      height: 250px; /* Adjust the height to your preference */
+      border-radius: 10px;
+      position: relative;
+      
+    
+    }
+
+    .changeaddress-button,
+    .next-button4,
+    .previous-button4 {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      position: absolute;
+      bottom: 20px;
+    }
+
+    .changeaddress-button {
+      right: 200px;
+      margin-bottom:15px;
+    }
+
+
+
+    .textbox-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      margin-top: 40px;
+    }
+    
+    .curved-textbox {
+      font-family: Arial, sans-serif; /* Change the font family */
+      font-size: 16px;
+      border-color: gray;
+      border-radius: 10px;
+      padding: 18px;
+      width: 80%;
+      overflow-wrap: break-word;
+
+    }
+
+
+    .cancel-button {
+      margin-right: 70px;
+      background-color: #007bff;
+      color: white; /* Corrected property name */
+      border: none; /* Remove button border */
+      border-radius: 20px; /* Apply border radius */
+      padding: 10px 20px; /* Add padding */
+      cursor: pointer;
+      text-decoration: none; /* Remove hyperlink styling */
+    }
+    
+    .change-button {
+      margin-left: 70px;
+      background-color: #007bff;
+      color: white; /* Corrected property name */
+      border: none; /* Remove button border */
+      border-radius: 20px; /* Apply border radius */
+      padding: 10px 20px; /* Add padding */
+      cursor: pointer;
+      text-decoration: none; /* Remove hyperlink styling */
+    }
+
           
         `}
       </style>
@@ -164,13 +317,23 @@ const Checkout = () => {
       </div>
       {step === 1 && (
         <div>
-          <div className="step-title">
-            <h2>Address</h2>
-            <button className="bottom-right-button" onClick={() => alert('Address Changed')}>
+          <div className="step-title1">
+            <textarea
+            wrap="hard"
+            rows="5"
+            columns="60"
+              value={address}
+              readOnly
+              className="edit-address"
+              style={{ textAlign: 'left',resize: "none" }}
+
+
+            />
+            <button className="changeaddress-button" onClick={handleOpenModal}>
               Change Address
             </button>
           </div>
-          <button className="next-button" onClick={handleNext}  style={{
+          <button className="next-button4" onClick={handleNext}  style={{
     backgroundColor: '#007bff',
     color: 'white',
     padding: '10px 20px',
@@ -185,6 +348,38 @@ const Checkout = () => {
           </button>
         </div>
       )}
+
+      {/* Modal */}
+      {showModal && (
+  <div className="modal">
+    <div className="modal-content">
+      <div className="textbox-container">
+        <textarea
+          wrap="hard"
+          rows="5"
+          columns="60"
+          placeholder="Change address here"
+          className="curved-textbox"
+          onChange={(e) => setAddress(e.target.value)} // Update address state on change
+          style={{resize:'none'}}
+        />
+      </div>
+      <div className="button-container">
+        <button className="transparent-button cancel-button" onClick={handleCancelAddressChange}>
+          Cancel
+        </button>
+        <button
+          className="transparent-button change-button"
+          onClick={() => handleChangeAddress(address)} // Pass the new address to handleChangeAddress
+        >
+          Change
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
       {step === 2 && (
   <div>
     <div className="step-title" style={{ textAlign: 'center', margin: 'auto' }}>
@@ -336,7 +531,6 @@ const Checkout = () => {
   </div>
   
 )}
-
     </div>
   );
 };

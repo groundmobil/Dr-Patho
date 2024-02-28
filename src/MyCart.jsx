@@ -127,13 +127,18 @@ const MyCart = () => {
       border-radius: 28px; /* Added border-radius for a curvy look */
       padding: 8px; /* Added padding for better aesthetics */
       resize: none;
+      font-size: 18px;
+      font-family: "Arial";
+      text-indent: 1em;
     }
 
     .modal-content textarea::placeholder {
       color: #aaa; /* Change placeholder color to a lighter gray */
-      fontSize: "24px",
-      fontWeight: "30"
+      font-size: 18px; /* Corrected syntax: remove quotes and added a unit (e.g., px) */
+      font-weight: 300; /* Corrected syntax: remove quotes */
+      font-family: "Arial"; /* Change the font family */
     }
+    
   `;
 
   const handleAddTests = () => {
