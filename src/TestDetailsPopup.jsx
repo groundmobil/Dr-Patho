@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LabDetailsPopup from './LabDetailsPopup'; 
+import LabDetailsPopup from './LabDetailsPopup';
 
 const TestDetailsPopup = ({ onClose }) => {
   const [addedToCart, setAddedToCart] = useState(Array(12).fill(false));
@@ -23,6 +23,22 @@ const TestDetailsPopup = ({ onClose }) => {
 
   const isAnyTestSelected = addedToCart.some((isSelected) => isSelected);
 
+  // Test data for each grid square
+  const testData = [
+    { name: 'HBA1c', description: 'Description for Test 1' },
+    { name: 'Complete Blood Count(CBC)- EDTA Whole Blood', description: 'Description for Test 2' },
+    { name: 'Glucose Post Prandial (PPBS)', description: 'Description for Test 2' },
+    { name: 'Glucose Random(RBS)- Sodium Fluoride', description: 'Description for Test 2' },
+    { name: 'Liver Function Test (LFT)', description: 'Description for Test 2' },
+    { name: 'Glucose, Fluid', description: 'Description for Test 2' },
+    { name: 'Diabetes Profile, Basic', description: 'Description for Test 2' },
+    { name: 'Electrolytes Urine', description: 'Description for Test 2' },
+    { name: 'Glucose Fasting(FBS)- Sodium Fluoride', description: 'Description for Test 2' },
+    { name: 'Stool Examination', description: 'Description for Test 2' },
+    { name: 'Lipid Profile- Serum', description: 'Description for Test 2' },
+    { name: 'Complete Urine Examination(CUE)- Spot Urine', description: 'Description for Test 2' },
+  ];
+
   return (
     <div>
       {showLabDetails ? (
@@ -33,7 +49,7 @@ const TestDetailsPopup = ({ onClose }) => {
             position: "fixed", left: "50%", top: "55%", transform: "translate(-50%, -50%)", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", display: "grid", gridTemplateColumns: "repeat(4, minmax(15vw, 1fr))", gap: "20px", padding: "15px", background: "transparent",
           }}
         >
-          {Array.from({ length: 12 }, (_, index) => (
+          {testData.map((test, index) => (
             <div
               key={index}
               style={{
@@ -41,9 +57,9 @@ const TestDetailsPopup = ({ onClose }) => {
               }}
             >
               <div>
-                <h3>Test {index + 1}</h3>
-                <p>Test Name</p>
-                <p>Test Description</p>
+                
+                <h4>{test.name}</h4>
+                <p>{test.description}</p>
               </div>
               <button
                 onClick={() => handleAddToCart(index)}
@@ -57,7 +73,7 @@ const TestDetailsPopup = ({ onClose }) => {
           ))}
           <button
             onClick={openLabDetails}
-            disabled={!isAnyTestSelected} 
+            disabled={!isAnyTestSelected}
             style={{
               gridColumn: "span 6", marginTop: "-4px", background: "blue", color: "#fff", fontSize: "15px", padding: "8px 10px", width: "120px", justifySelf: "end", borderRadius: "40px",
             }}
