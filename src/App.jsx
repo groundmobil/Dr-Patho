@@ -35,7 +35,7 @@ const App = () => {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/Images/dr.png)`,
           backgroundSize: 'cover',
-          height: '100vh',
+          minHeight: '100vh', // Change height to minHeight for full screen background
         }}
       >
         <BrowserRouter>
@@ -51,7 +51,6 @@ const App = () => {
             <Route path="/TestDetailsPopup" element={<TestDetailsPopup />} />
             <Route path="/Checkout" element={<Checkout />} />
           </Routes>
-          
         </BrowserRouter>
       </div>
     </ThemeProvider>

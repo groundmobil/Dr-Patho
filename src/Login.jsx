@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 
 const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
@@ -234,28 +234,74 @@ const App = () => {
     setPhoneNumber(event.target.value);
   };
 
-  const handlePhoneSubmit = (event) => {
+  const handlePhoneSubmit = async (event) => {
     event.preventDefault();
-
+  
     const regex = /[^0-9]/g;
     if (phoneNumber.length < 10 || regex.test(phoneNumber)) {
       alert("Invalid Phone Number");
       return;
     }
+  
+    try {
+      // Make a POST request to your backend endpoint
+      const response = await axios.post('http://localhost:8080/api/contact', {
+        phoneNumber: phoneNumber,
+      });
 
-    setShowOtpInput(true);
+  
+      // Assuming your backend responds with a success message
+      if (response.data.message === 'Contact info saved successfully') {
+        setShowOtpInput(true);
+      } else {
+        alert("Failed to save contact info");
+      }
+    } catch (error) {
+      console.error("Error while making POST request:", error);
+      alert("Failed to save contact info");
+    }
   };
-
-  const handlePersonalInfoSubmit = (personalInfo) => {
-    console.log("Personal Info Submitted", personalInfo);
-    setShowPersonalInfo(false);
-    setShowAddressPopup(true);
+  const handlePersonalInfoSubmit = async (personalInfo) => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/personal-info', {
+        name: personalInfo.Name,
+        email: personalInfo.Email,
+        dob: personalInfo.dob,
+        gender: personalInfo.gender,
+      });
+  
+      if (response.data.message === 'Personal info saved successfully') {
+        setShowPersonalInfo(false);
+        setShowAddressPopup(true);
+      } else {
+        alert("Failed to save personal info");
+      }
+    } catch (error) {
+      console.error("Error while making POST request:", error);
+      alert("Failed to save personal info");
+    }
   };
-
-  const handleAddressSubmit = (addressInfo) => {
-    console.log("Address Info Submitted", addressInfo);
-    setShowAddressPopup(false);
+  
+  const handleAddressSubmit = async (addressInfo) => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/address', {
+      pinCode: address.pinCode,
+      address: address.address,
+      city: address.city,
+      state: address.state,
+    });
+  
+      if (response.data.message === 'Address saved successfully') {
+        setShowAddressPopup(false);
+      } else {
+        alert("Failed to save address info");
+      }
+    } catch (error) {
+      console.error("Error while making POST request:", error);
+      alert("Failed to save address info");
+    }
   };
+  
 
   const handleCheckboxChange = (checkbox) => {
     if (checkbox === "agree1") {

@@ -3,9 +3,19 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { CgMenu, CgClose } from "react-icons/cg";
 
+const Header = styled.header`
+  padding: 0.5rem 2rem; /* Decrease top padding */
+
+`;
+
 const NavbarContainer = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  @media screen and (max-width: ${({ theme }) => theme.media.mobile}) {
+    display: none;
+  }
 `;
 
 const NavList = styled.ul`
@@ -13,7 +23,8 @@ const NavList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-top: -3.5rem;
+  margin-top: -6rem;
+  margin-right: -5rem;
 `;
 
 const NavLinkStyled = styled(NavLink)`
@@ -44,29 +55,62 @@ const MobileNavbarBtn = styled.div`
 
   @media screen and (max-width: ${({ theme }) => theme.media.mobile}) {
     display: flex;
-    justify-content: flex-end; /* Align the icon to the right */
-    align-items: center; 
-    z-index: 999;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1001;
     font-size: 2rem;
-  }
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    }
 
-  .close-outline {
-    display: none;
-  }
+    .close-icon {
+      color: black; /* Set the color of the hamburger icon to white */
+      display: ${({ isMenuOpen }) => (isMenuOpen ? "block" : "none")}; /* Show close icon when menu is open */
+    }
+
+    .menu-outline {
+      color: white; /* Set the color of the hamburger icon to white */
+      display: ${({ isMenuOpen }) => (isMenuOpen ? "none" : "block")}; /* Show hamburger icon when menu is closed */
+    }
 
   .navbar-list {
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
-    right: 0; 
-    background-color: black; 
+    right: 0;
+    background-color: black;
     display: ${({ isMenuOpen }) => (isMenuOpen ? "flex" : "none")};
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
   }
+`;
+
+
+const MobileMenuContainer = styled.div`
+  position: fixed;
+  top: 0;
+  right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MobileNavLinkStyled = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 `;
 
 const Navbar = () => {
@@ -77,8 +121,8 @@ const Navbar = () => {
   };
 
   return (
-    <NavbarContainer>
-      <div className="menuIcon">
+    <>
+      <NavbarContainer>
         <NavList>
           <NavItem>
             <NavLinkStyled to="/">Home</NavLinkStyled>
@@ -99,16 +143,34 @@ const Navbar = () => {
             <NavLinkStyled to="/Profile">Profile</NavLinkStyled>
           </NavItem>
         </NavList>
-        <MobileNavbarBtn
-          style={{ color: "balck" }}
-          onClick={toggleMenu}
-          isMenuOpen={isMenuOpen}
-        >
-          <CgMenu className={`mobile-nav-icons ${isMenuOpen ? "hidden" : ""}`} />
-          <CgClose className={`close-outline mobile-nav-icons ${isMenuOpen ? "" : "hidden"}`} />
-        </MobileNavbarBtn>
-      </div>
-    </NavbarContainer>
+      </NavbarContainer>
+      <MobileNavbarBtn onClick={toggleMenu} isMenuOpen={isMenuOpen}>
+  <CgMenu className={`mobile-nav-icons menu-outline ${isMenuOpen ? 'hidden' : ''}`} />
+  <CgClose className={`mobile-nav-icons close-icon ${isMenuOpen ? '' : 'hidden'}`} />
+</MobileNavbarBtn>
+
+
+      <MobileMenuContainer isOpen={isMenuOpen}>
+        <MobileNavLinkStyled to="/" onClick={toggleMenu}>
+          Home
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/BookNow" onClick={toggleMenu}>
+          Book Now
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/AboutUs" onClick={toggleMenu}>
+          About Us
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/MyCart" onClick={toggleMenu}>
+          My Cart
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
+          Login
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
+          Profile
+        </MobileNavLinkStyled>
+      </MobileMenuContainer>
+    </>
   );
 };
 
