@@ -61,7 +61,7 @@ const MobileNavbarBtn = styled.div`
     font-size: 2rem;
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: 40px;
     cursor: pointer;
     }
 
