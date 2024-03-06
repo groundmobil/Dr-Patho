@@ -282,7 +282,7 @@ const App = () => {
     }
   };
   
-  const handleAddressSubmit = async (addressInfo) => {
+  const handleAddressSubmit = async (address) => {
     try {
       const response = await axios.post('http://localhost:8080/api/address', {
       pinCode: address.pinCode,

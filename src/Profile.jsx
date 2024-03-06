@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 
 const Profile = () => {
   const [activeOption, setActiveOption] = useState("Your Account");
@@ -32,11 +32,21 @@ const Profile = () => {
     setReview(event.target.value);
   };
 
-  const handleReviewSubmit = () => {
-    console.log(`Rating: ${rating}, Review: ${review}`);
-    // Add your logic for submitting the review to a server or performing any other actions.
+  const handleReviewSubmit = async () => {
+    try {
+      await axios.post("http://localhost:8080/reviews", {
+        rating: rating,
+        reviewText: review,
+      });
+  
+      console.log("Review submitted successfully");
+      // Add any additional logic you need after submitting the review
+    } catch (error) {
+      console.error("Error submitting review:", error.message);
+      // Handle the error appropriately
+    }
   };
-
+  
   return (
     <div style={{ display: "flex", backgroundColor: "white", marginTop: "-95px" }}>
       <div style={{ width: "200px", backgroundColor: "white", padding: "10px", borderRight: "1px solid #ccc" }}>

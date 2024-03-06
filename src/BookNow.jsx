@@ -16,17 +16,45 @@ const BookNow = () => {
     }
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
-    console.log("Selected File:", selectedFile);
+  
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+  
+      // Make a separate API call to handle file upload
+      const fileUploadResponse = await fetch('http://localhost:8080/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      console.log('File upload response:', fileUploadResponse);
+    } catch (error) {
+      console.error('Error uploading file:', error.message);
+    }
   };
 
-  const handleSearch = () => {
-    setShowPopup(true);
-    console.log("Pin Code:", pincode);
-    console.log("Selected Test:", selectedTest);
-    console.log("Search Test:", searchTest);
+  const handleSearch = async () => {
+    try {
+      setShowPopup(true);
+      console.log("Pin Code:", pincode);
+      console.log("Selected Test:", selectedTest);
+  
+      // Make an API call to store data in the database
+      await fetch('http://localhost:8080/booknow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pincode, selectedTest }),
+      });
+  
+    } catch (error) {
+      console.error('Error storing BookNow data:', error.message);
+    }
   };
+  
 
   const closePopup = () => {
     setShowPopup(false);
