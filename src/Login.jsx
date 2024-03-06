@@ -234,7 +234,7 @@ const App = () => {
     setPhoneNumber(event.target.value);
   };
 
-  const handlePhoneSubmit = (event) => {
+  const handlePhoneSubmit = async (event) => {
     event.preventDefault();
 
     const regex = /[^0-9]/g;
