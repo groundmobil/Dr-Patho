@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+
 
 const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
@@ -234,9 +234,9 @@ const App = () => {
     setPhoneNumber(event.target.value);
   };
 
-  const handlePhoneSubmit = async (event) => {
+  const handlePhoneSubmit = (event) => {
     event.preventDefault();
-  
+
     const regex = /[^0-9]/g;
     if (phoneNumber.length < 10 || regex.test(phoneNumber)) {
       alert("Invalid Phone Number");
@@ -282,7 +282,7 @@ const App = () => {
     }
   };
   
-  const handleAddressSubmit = async (address) => {
+  const handleAddressSubmit = async (addressInfo) => {
     try {
       const response = await axios.post('http://localhost:8080/api/address', {
       pinCode: address.pinCode,
@@ -301,7 +301,6 @@ const App = () => {
       alert("Failed to save address info");
     }
   };
-  
 
   const handleCheckboxChange = (checkbox) => {
     if (checkbox === "agree1") {
