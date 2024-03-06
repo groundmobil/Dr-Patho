@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const reviewsRoutes = require('./Reviewsdb');
 const loginRoutes = require('./logindb');
 const BookNowdb = require('./BookNowdb');
-const otplib = require("otplib");
 
 // Initialize Express app
 const server = express();
