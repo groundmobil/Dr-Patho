@@ -36,19 +36,19 @@ const TestDetailsPopup = ({ onClose }) => {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/Images/dr.png)`,
-        backgroundSize: 'cover',  // Set background image to cover the entire div
-        backgroundPosition: 'center', // Center the background image
-        width: '100%', // Set the width to cover the entire screen
-        height: '100vh', // Set the height to cover the entire screen
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%', 
+        height: '100vh', 
         padding: '20px',
         borderRadius: '18px',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         zIndex: '9999',
         color: 'white',
-        display: 'flex', // Add flex display to center the content
-      flexDirection: 'column', // Stack children vertically
-      alignItems: 'center', // Center horizontally
-      justifyContent: 'center', // Center vertically
+        display: 'flex',
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
       textAlign: 'center', 
       }}
     >
@@ -67,8 +67,8 @@ const TestDetailsPopup = ({ onClose }) => {
       >
         &times;
       </button>
-      <h4 style={{ fontSize: '44px' }}>{test.name}</h4> {/* Adjust the font size */}
-    <p style={{ fontSize: '25px' }}>{test.description}</p> {/* Adjust the font size */}
+      <h4 style={{ fontSize: '44px' }}>{test.name}</h4>
+    <p style={{ fontSize: '25px' }}>{test.description}</p> 
     </div>
   );
 
