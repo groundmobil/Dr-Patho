@@ -24,7 +24,7 @@ const BookNow = () => {
       formData.append('file', selectedFile);
   
       // Make a separate API call to handle file upload
-      const fileUploadResponse = await fetch('http://drpatho.in:8080/upload', {
+      const fileUploadResponse = await fetch('https://drpatho.in:8080/upload', {
         method: 'POST',
         body: formData,
       });
