@@ -24,7 +24,7 @@ const BookNow = () => {
       formData.append('file', selectedFile);
   
       // Make a separate API call to handle file upload
-      const fileUploadResponse = await fetch('https://drpatho.in:8080/upload', {
+      const fileUploadResponse = await fetch('http://localhost:8080/upload', {
         method: 'POST',
         body: formData,
       });
@@ -42,7 +42,7 @@ const BookNow = () => {
       console.log("Selected Test:", selectedTest);
   
       // Make an API call to store data in the database
-      await fetch('http://drpatho.in:8080/booknow', {
+      await fetch('http://localhost:8080/booknow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
