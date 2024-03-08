@@ -9,6 +9,12 @@ const BookNowdb = require('./BookNowdb');
 // Initialize Express app
 const server = express();
 
+server.use(cors({
+  origin: 'https://www.drpatho.in/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
 // Middleware setup
 server.use(cors());
 server.use(express.json());

@@ -245,7 +245,7 @@ const App = () => {
   
     try {
       // Make a POST request to your backend endpoint
-      const response = await axios.post('http://localhost:8080/api/contact', {
+      const response = await axios.post('http://drpatho.in:8080/api/contact', {
         phoneNumber: phoneNumber,
       });
 
@@ -263,7 +263,7 @@ const App = () => {
   };
   const handlePersonalInfoSubmit = async (personalInfo) => {
     try {
-      const response = await axios.post('http://localhost:8080/api/personal-info', {
+      const response = await axios.post('http://drpatho.in:8080/api/personal-info', {
         name: personalInfo.Name,
         email: personalInfo.Email,
         dob: personalInfo.dob,
@@ -284,7 +284,7 @@ const App = () => {
   
   const handleAddressSubmit = async (address) => {
     try {
-      const response = await axios.post('http://localhost:8080/api/address', {
+      const response = await axios.post('http://drpatho.in:8080/api/address', {
       pinCode: address.pinCode,
       address: address.address,
       city: address.city,

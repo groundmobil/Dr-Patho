@@ -34,7 +34,7 @@ const Profile = () => {
 
   const handleReviewSubmit = async () => {
     try {
-      await axios.post("http://localhost:8080/reviews", {
+      await axios.post("http://drpatho.in:8080/reviews", {
         rating: rating,
         reviewText: review,
       });
