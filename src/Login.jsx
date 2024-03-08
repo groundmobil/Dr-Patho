@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 
 const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
@@ -282,7 +282,7 @@ const App = () => {
     }
   };
   
-  const handleAddressSubmit = async (addressInfo) => {
+  const handleAddressSubmit = async (address) => {
     try {
       const response = await axios.post('http://localhost:8080/api/address', {
       pinCode: address.pinCode,
