@@ -58,10 +58,10 @@ const TestDetailsPopup = ({ onClose }) => {
           background: 'transparent',
           border: 'none',
           position: 'absolute',
-          top: '10px',
-          right: '10px',
+          top: '30px',
+          right: '30px',
           cursor: 'pointer',
-          fontSize: '16px',
+          fontSize: '26px',
           color: 'white',
         }}
       >
