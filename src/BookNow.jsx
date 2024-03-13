@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { FaMapMarkerAlt, FaSearch, FaFileSignature } from "react-icons/fa";
 import TestDetailsPopup from './TestDetailsPopup';
 
+
 const BookNow = () => {
   const fileInputRef = useRef(null);
   const [pincode, setPincode] = useState("");
@@ -37,24 +38,38 @@ const BookNow = () => {
 
   const handleSearch = async () => {
     try {
-      setShowPopup(true);
-      console.log("Pin Code:", pincode);
-      console.log("Selected Test:", selectedTest);
+      const allowedPincodes = ['411017', '444606'];
   
-      // Make an API call to store data in the database
-      await fetch('http://localhost:8080/booknow', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ pincode, selectedTest }),
-      });
+      if (allowedPincodes.includes(pincode)) {
+        if (selectedTest.toLowerCase() === 'diabetes') {
+          setShowPopup(true);
+          console.log("Pin Code:", pincode);
+          console.log("Selected Test:", selectedTest);
   
+          // Make an API call to store data in the database
+          await fetch('http://localhost:8080/booknow', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ pincode, selectedTest }),
+          });
+  
+        } else {
+          // Display a message if the entered test is not "diabetes"
+          alert('This test is not availabe currently.');
+        }
+      } else if (!allowedPincodes.includes(pincode) && selectedTest.toLowerCase() === 'diabetes') {
+        // Display a message if the entered pin code is not allowed
+        alert('We work only at pin codes 411017 and 444606.');
+      } else {
+        // Display a message if both pin code and test are not allowed
+        alert('We work only at pin codes 411017 and 444606 and currently, this test is not availabe.');
+      }
     } catch (error) {
       console.error('Error storing BookNow data:', error.message);
     }
   };
-  
 
   const closePopup = () => {
     setShowPopup(false);
@@ -80,8 +95,8 @@ const BookNow = () => {
   return (
     <div>
       {showPopup ? (
-        <TestDetailsPopup onClose={closePopup} />
-      ) : (
+  <TestDetailsPopup onClose={closePopup} pincode={pincode} />
+) : (
         <div
           style={{
             textAlign: "center",

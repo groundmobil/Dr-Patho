@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LabDetailsPopup from './LabDetailsPopup';
 
-const TestDetailsPopup = ({ onClose }) => {
+const TestDetailsPopup = ({ onClose, pincode }) => {
   const [addedToCart, setAddedToCart] = useState(Array(12).fill(false));
   const [showLabDetails, setShowLabDetails] = useState(false);
   const [expandedDescriptionIndex, setExpandedDescriptionIndex] = useState(null);
@@ -93,8 +93,8 @@ const TestDetailsPopup = ({ onClose }) => {
   return (
     <div>
       {showLabDetails ? (
-        <LabDetailsPopup onClose={closeLabDetails} />
-      ) : (
+      <LabDetailsPopup onClose={closeLabDetails} pincode={pincode} />
+    ) : (
        <div>
           <div
             className={expandedDescriptionIndex !== null ? 'grid-hidden' : 'grid-visible'}
