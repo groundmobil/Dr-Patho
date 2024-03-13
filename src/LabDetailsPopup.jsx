@@ -62,11 +62,11 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
   ];
 
   const labsForPincode411017 = [
-    { name: 'Pathkind Lab', price: 200, address: 'Besides Satnam Medical, Shop No 2, Ground Floor, Survey No 5/3, Kalewadi - Rahatani Rd, near Radhika Electronics, Ram Nagar, Pimple Saudagar', rating: 4.9},
-    { name: 'Neubrg AG Diagnostics', price: 350, address: 'c/o Star Imaging and Research Centre, 1st Floor Solitaire Business Hub, Survey No. 208/206, Kalewadi Phata, Kaspate Wasti, Wakad', rating: 'No Reviews'},
-    { name: 'Metropolis', price: 350, address: 'Sukhwani Chamber Pimpri Colony, Pimpri Chinchwad, near Hotel Ratna', rating: 4.3},
-    { name: 'Redcliffe', price: 350, address: 'Office No 7 & 8, Sr No 101, Jm Heights, Sai Shrishti Angan, Kuldeep Angan Society, Nehru Nagar, Pimpri Colony', rating: 4.9},
-    { name: 'Dr Lal Path Labs', price: 350, address: 'Shop No. 76, Ground Floor, Vision 9 Mall, Kunal Icon Rd, Pimple Saudagar', rating: 'No Reviews'},
+    { name: 'Pathkind Lab', price: 6700, address: 'Besides Satnam Medical, Shop No 2, Ground Floor, Survey No 5/3, Kalewadi - Rahatani Rd, near Radhika Electronics, Ram Nagar, Pimple Saudagar', rating: 4.9},
+    { name: 'Neubrg AG Diagnostics', price: 6200, address: 'c/o Star Imaging and Research Centre, 1st Floor Solitaire Business Hub, Survey No. 208/206, Kalewadi Phata, Kaspate Wasti, Wakad', rating: 'No Reviews'},
+    { name: 'Metropolis', price: 6500, address: 'Sukhwani Chamber Pimpri Colony, Pimpri Chinchwad, near Hotel Ratna', rating: 4.3},
+    { name: 'Redcliffe', price: 6700, address: 'Office No 7 & 8, Sr No 101, Jm Heights, Sai Shrishti Angan, Kuldeep Angan Society, Nehru Nagar, Pimpri Colony', rating: 4.9},
+    { name: 'Dr Lal Path Labs', price: 6700, address: 'Shop No. 76, Ground Floor, Vision 9 Mall, Kunal Icon Rd, Pimple Saudagar', rating: 'No Reviews'},
   ];
 
   const labs = pincode === '411017' ? labsForPincode411017 : labsForPincode444606;
