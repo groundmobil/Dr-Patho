@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { MdOutlineMyLocation } from "react-icons/md";
 
 const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
@@ -10,6 +11,39 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
   const [state, setState] = useState("");
 
   const navigate = useNavigate(); 
+  const detectLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            // Fetch address details using reverse geocoding service
+            const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+            if (response.data.address) {
+              setAddress(response.data.display_name);
+              const addressComponents = response.data.address;
+              let city = addressComponents.city || addressComponents.town || "";
+              let pinCode = addressComponents.postcode || "";
+              setState(addressComponents.state || addressComponents.country);
+              setCity(city);
+              setPinCode(pinCode);
+            } else {
+              alert("Failed to detect location.");
+            }
+          } catch (error) {
+            console.error("Error while fetching address:", error);
+            alert("Failed to detect location.");
+          }
+        },
+        (error) => {
+          console.error("Error while getting user's location:", error);
+          alert("Failed to detect location.");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
  
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +108,9 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
     <div style={{ position: "auto", top: 0, left: 0, width: "50%", height: "50%", backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div style={modalStyle}>
         <span style={closeModalStyle} onClick={onClose}>&times;</span>
+        <button onClick={detectLocation} style={{ marginBottom: "10px",  width: "45%", height: "30px", borderRadius: "25px", backgroundColor: "blue", color: "white", fontSize: "18px",}}><MdOutlineMyLocation className="icons" /> Detect My Location</button>
         <h2>Address Information</h2>
+        
         <form onSubmit={handleSubmit}>
           <input
             type="text"

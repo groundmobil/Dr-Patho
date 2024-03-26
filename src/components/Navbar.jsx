@@ -5,7 +5,6 @@ import { CgMenu, CgClose } from "react-icons/cg";
 
 const Header = styled.header`
   padding: 0.5rem 2rem; /* Decrease top padding */
-
 `;
 
 const NavbarContainer = styled.nav`
@@ -63,17 +62,17 @@ const MobileNavbarBtn = styled.div`
     top: 20px;
     right: 60px;
     cursor: pointer;
-    }
+  }
 
-    .close-icon {
-      color: black; /* Set the color of the hamburger icon to white */
-      display: ${({ isMenuOpen }) => (isMenuOpen ? "block" : "none")}; /* Show close icon when menu is open */
-    }
+  .close-icon {
+    color: black;
+    display: ${({ isMenuOpen }) => (isMenuOpen ? "block" : "none")};
+  }
 
-    .menu-outline {
-      color: white; /* Set the color of the hamburger icon to white */
-      display: ${({ isMenuOpen }) => (isMenuOpen ? "none" : "block")}; /* Show hamburger icon when menu is closed */
-    }
+  .menu-outline {
+    color: white;
+    display: ${({ isMenuOpen }) => (isMenuOpen ? "none" : "block")};
+  }
 
   .navbar-list {
     width: 100vw;
@@ -89,7 +88,6 @@ const MobileNavbarBtn = styled.div`
     text-align: center;
   }
 `;
-
 
 const MobileMenuContainer = styled.div`
   position: fixed;
@@ -115,6 +113,7 @@ const MobileNavLinkStyled = styled(NavLink)`
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user authentication status
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -136,19 +135,25 @@ const Navbar = () => {
           <NavItem>
             <NavLinkStyled to="/MyCart">My Cart</NavLinkStyled>
           </NavItem>
-          <NavItem>
-            <NavLinkStyled to="/Login">Login</NavLinkStyled>
-          </NavItem>
-          <NavItem>
-            <NavLinkStyled to="/Profile">Profile</NavLinkStyled>
-          </NavItem>
+          {isLoggedIn ? ( // Conditionally render based on login status
+            <>
+              <NavItem>
+                <NavLinkStyled to="/Profile">Profile</NavLinkStyled>
+              </NavItem>
+            </>
+          ) : (
+            <>
+              <NavItem>
+                <NavLinkStyled to="/Login">Login</NavLinkStyled>
+              </NavItem>
+            </>
+          )}
         </NavList>
       </NavbarContainer>
       <MobileNavbarBtn onClick={toggleMenu} isMenuOpen={isMenuOpen}>
-  <CgMenu className={`mobile-nav-icons menu-outline ${isMenuOpen ? 'hidden' : ''}`} />
-  <CgClose className={`mobile-nav-icons close-icon ${isMenuOpen ? '' : 'hidden'}`} />
-</MobileNavbarBtn>
-
+        <CgMenu className={`mobile-nav-icons menu-outline ${isMenuOpen ? 'hidden' : ''}`} />
+        <CgClose className={`mobile-nav-icons close-icon ${isMenuOpen ? '' : 'hidden'}`} />
+      </MobileNavbarBtn>
 
       <MobileMenuContainer isOpen={isMenuOpen}>
         <MobileNavLinkStyled to="/" onClick={toggleMenu}>
@@ -163,12 +168,19 @@ const Navbar = () => {
         <MobileNavLinkStyled to="/MyCart" onClick={toggleMenu}>
           My Cart
         </MobileNavLinkStyled>
-        <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
-          Login
-        </MobileNavLinkStyled>
-        <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
-          Profile
-        </MobileNavLinkStyled>
+        {isLoggedIn ? ( // Conditionally render based on login status
+          <>
+            <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
+              Profile
+            </MobileNavLinkStyled>
+          </>
+        ) : (
+          <>
+            <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
+              Login
+            </MobileNavLinkStyled>
+          </>
+        )}
       </MobileMenuContainer>
     </>
   );
