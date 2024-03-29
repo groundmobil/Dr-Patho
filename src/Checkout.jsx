@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 
 const steps = ['Address', 'Date and Time', 'Payment'];
 
 const Checkout = () => {
   const [step, setStep] = useState(1);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null); 
   const [showModal, setShowModal] = useState(false);
   const [address, setAddress] = useState('Your Address'); // State to hold the address
   const [originalAddress, setOriginalAddress] = useState('');
-
+  const [selectedTime, setSelectedTime] = useState("");
 
   const handleNext = () => {
     if (step < steps.length) {
@@ -26,6 +26,7 @@ const Checkout = () => {
   const handleDateSelection = (date) => {
     setSelectedDate((prevDate) => (prevDate === date ? null : date));
   };
+  
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -55,9 +56,39 @@ const Checkout = () => {
     setShowModal(false); // Set showModal to false to close the modal
   };
   
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
   
-
-
+    try {
+      const response = await axios.post('http://localhost:8080/slot', {
+        address: address,
+        date: selectedDate,
+        timeSlot: selectedTimeSlot
+      });
+  
+      if (response.data.message === 'Slot data saved successfully') {
+        window.alert('Slot saved successfully!');
+        // Reset state or navigate to another page as needed
+      } else {
+        window.alert('Failed to save slot');
+      }
+    } catch (error) {
+      console.error('Error while making POST request:', error);
+      window.alert('Failed to save slot');
+    }
+  };
   return (
     <div>
       <style>
@@ -169,7 +200,7 @@ const Checkout = () => {
           
           .transparent-button:hover,
           .transparent-button.selected {
-            background-color: #007bff; /* Blue background color on hover or selected */
+            background-color: blue; /* Blue background color on hover or selected */
             color: white; /* White text color on hover or selected */
           }
 
@@ -301,7 +332,7 @@ const Checkout = () => {
       text-decoration: none; /* Remove hyperlink styling */
     }
 
-          
+              
         `}
       </style>
       <div className="timeline">
@@ -397,15 +428,15 @@ const Checkout = () => {
 
             return (
               <button
-  key={index}
-  className={`transparent-button ${selectedDate === date ? 'selected' : ''}`}
-  onClick={() => handleDateSelection(date)}
->
-  <div>
-    <div>{formattedDate}</div>
-    <span>{formattedDay}</span>
-  </div>
-</button>
+              key={index}
+              className={`transparent-button ${selectedDate && selectedDate.getTime() === date.getTime() ? 'selected' : ''}`}
+              onClick={() => handleDateSelection(date)}
+            >
+              <div>
+                <div>{formattedDate}</div>
+                <span>{formattedDay}</span>
+              </div>
+            </button>
             );
           })}
         </div>
@@ -495,43 +526,43 @@ const Checkout = () => {
       <p>Total Price: </p>
     </div>
     <button
-  className="previous-button"
-  onClick={handlePrev}
-  style={{
-    backgroundColor: '#007bff',
-    color: 'white',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '20px',
-    cursor: 'pointer',
-    position: 'absolute',
-    left: '20px', 
-    bottom: '20px', 
-  }}
->
-  Previous
-</button>
+      className="previous-button"
+      onClick={handlePrev}
+      style={{
+        backgroundColor: '#007bff',
+        color: 'white',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        position: 'absolute',
+        left: '20px', 
+        bottom: '20px', 
+      }}
+    >
+      Previous
+    </button>
     <button
-  className="next-button"
-  onClick={handleNext}
-  style={{
-    backgroundColor: '#007bff',
-    color: 'white',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '20px',
-    cursor: 'pointer',
-    position: 'absolute',
-    right: '20px',
-    bottom: '20px',
-  }}
->
-  Complete Purchase
-</button>
+      className="next-button"
+      onClick={handleSubmit} 
+      style={{
+        backgroundColor: '#007bff',
+        color: 'white',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        position: 'absolute',
+        right: '20px',
+        bottom: '20px',
+      }}
+    >
+      Complete Purchase
+    </button>
   </div>
-  
 )}
     </div>
+    
   );
 };
 

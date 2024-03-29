@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const reviewsRoutes = require('./Reviewsdb');
 const loginRoutes = require('./logindb');
 const BookNowdb = require('./BookNowdb');
+const Slotdb = require('./Slotdb');
 
 // Initialize Express app
 const server = express();
@@ -60,6 +61,20 @@ server.post('/reviews', async (req, res) => {
   await reviewsRoutes.saveReviewData(rating, reviewText); // Change Reviewsdb to reviewsRoutes
 
   res.status(200).json({ message: 'Review data saved successfully' });
+});
+
+// Update the endpoint to handle storing slot data
+server.post('/slot', async (req, res) => {
+  const { address, date, timeSlot} = req.body;
+
+  if (!address || !date || !timeSlot ) {
+    return res.status(400).json({ error: 'Address, date, and time slot are required' });
+  }
+
+  // Save slot data to the database
+  await Slotdb.saveSlotData(address, date, timeSlot);
+
+  res.status(200).json({ message: 'Slot data saved successfully' });
 });
 
 // Set up server to listen on specified port
