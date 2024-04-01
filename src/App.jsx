@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import LabDetailsPopup from "./LabDetailsPopup";
 import TestDetailsPopup from "./TestDetailsPopup";
 import Checkout from "./Checkout";
+import Purchase from "./Purchase";
 
 const App = () => {
   const theme = {
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/LabDetailsPopup" element={<LabDetailsPopup />} />
             <Route path="/TestDetailsPopup" element={<TestDetailsPopup />} />
             <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/Purchase" element={<Purchase />} />
           </Routes>
         </BrowserRouter>
       </div>

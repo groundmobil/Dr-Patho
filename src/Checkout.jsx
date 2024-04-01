@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['Address', 'Date and Time', 'Payment'];
 
@@ -11,6 +12,8 @@ const Checkout = () => {
   const [address, setAddress] = useState('Your Address'); // State to hold the address
   const [originalAddress, setOriginalAddress] = useState('');
   const [selectedTime, setSelectedTime] = useState("");
+
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (step < steps.length) {
@@ -80,7 +83,8 @@ const Checkout = () => {
   
       if (response.data.message === 'Slot data saved successfully') {
         window.alert('Slot saved successfully!');
-        // Reset state or navigate to another page as needed
+        // Redirect to Payment page after successful slot save
+        navigate('/Purchase');
       } else {
         window.alert('Failed to save slot');
       }

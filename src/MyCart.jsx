@@ -7,9 +7,7 @@ const MyCart = () => {
   const [dateOfBirth, setDateOfBirth] = useState(""); // State to hold date of birth
   const [gender, setGender] = useState(""); // State to hold gender
   const navigate = useNavigate();
-
   
-
   const handleAddTests = () => {
     console.log("Adding more tests");
     // Add your logic here
