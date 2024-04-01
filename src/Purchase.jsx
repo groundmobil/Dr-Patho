@@ -89,7 +89,7 @@ const Payment = () => {
               />
             </div>
           )}
-          <label style={{ marginBottom: '10px', border: paymentMethod === 'paypal' ? '2px solid green' : 'none', padding: '5px', borderRadius: '5px' }}>
+          <label style={{ marginBottom: '10px', border: paymentMethod === 'paypal' ? '2px solid blue' : 'none', padding: '5px', borderRadius: '5px' }}>
             <input
               type="radio"
               name="paymentMethod"
@@ -111,7 +111,7 @@ const Payment = () => {
               />
             </div>
           )}
-          <label style={{ marginBottom: '10px', border: paymentMethod === 'UPI' ? '2px solid orange' : 'none', padding: '5px', borderRadius: '5px' }}>
+          <label style={{ marginBottom: '10px', border: paymentMethod === 'UPI' ? '2px solid blue' : 'none', padding: '5px', borderRadius: '5px' }}>
             <input
               type="radio"
               name="paymentMethod"
@@ -145,7 +145,7 @@ const Payment = () => {
               <p style={{ fontSize: '12px', color: '#888' }}>Enter your UPI ID associated with your selected UPI method.</p>
             </div>
           )}
-          <label style={{ marginBottom: '10px', border: paymentMethod === 'COD' ? '2px solid red' : 'none', padding: '5px', borderRadius: '5px' }}>
+          <label style={{ marginBottom: '10px', border: paymentMethod === 'COD' ? '2px solid blue' : 'none', padding: '5px', borderRadius: '5px' }}>
             <input
               type="radio"
               name="paymentMethod"
