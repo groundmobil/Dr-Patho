@@ -163,10 +163,10 @@ const Navbar = () => {
           My Cart
         </MobileNavLinkStyled>
         <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
-          About Us
+          Login
         </MobileNavLinkStyled>
         <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
-          About Us
+          Profile
         </MobileNavLinkStyled>
       </MobileMenuContainer>
     </>
