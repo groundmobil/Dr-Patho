@@ -162,19 +162,12 @@ const Navbar = () => {
         <MobileNavLinkStyled to="/MyCart" onClick={toggleMenu}>
           My Cart
         </MobileNavLinkStyled>
-        {isLoggedIn ? ( // Conditionally render based on login status
-          <>
-            <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
-              Profile
-            </MobileNavLinkStyled>
-          </>
-        ) : (
-          <>
-            <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
-              Login
-            </MobileNavLinkStyled>
-          </>
-        )}
+        <MobileNavLinkStyled to="/Login" onClick={toggleMenu}>
+          About Us
+        </MobileNavLinkStyled>
+        <MobileNavLinkStyled to="/Profile" onClick={toggleMenu}>
+          About Us
+        </MobileNavLinkStyled>
       </MobileMenuContainer>
     </>
   );
