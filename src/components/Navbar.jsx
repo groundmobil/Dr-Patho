@@ -135,19 +135,13 @@ const Navbar = () => {
           <NavItem>
             <NavLinkStyled to="/MyCart">My Cart</NavLinkStyled>
           </NavItem>
-          {isLoggedIn ? ( // Conditionally render based on login status
-            <>
-              <NavItem>
-                <NavLinkStyled to="/Profile">Profile</NavLinkStyled>
-              </NavItem>
-            </>
-          ) : (
-            <>
-              <NavItem>
-                <NavLinkStyled to="/Login">Login</NavLinkStyled>
-              </NavItem>
-            </>
-          )}
+          <NavItem>
+            <NavLinkStyled to="/Login">Login</NavLinkStyled>
+          </NavItem>
+          <NavItem>
+            <NavLinkStyled to="Profile">Profile</NavLinkStyled>
+          </NavItem>
+          
         </NavList>
       </NavbarContainer>
       <MobileNavbarBtn onClick={toggleMenu} isMenuOpen={isMenuOpen}>
