@@ -7,10 +7,16 @@ const Profile = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleOptionClick = (option) => {
     if (option === "My Cart") {
       navigate("/MyCart"); // Navigate to the MyCart route
+    } else if (option === "Logout") {
+      // Handle logout
+      setIsLoggedIn(false);
+      // Redirect to login page or any other desired action
+      navigate("/");
     } else {
       setActiveOption(option);
     }
@@ -55,7 +61,8 @@ const Profile = () => {
   
   return (
     <div style={{ display: "flex", backgroundColor: "white", marginTop: "-95px" }}>
-      <div style={{ width: "200px", backgroundColor: "white", padding: "10px", borderRight: "1px solid #ccc" }}>
+      {isLoggedIn && (
+        <div style={{ width: "200px", backgroundColor: "white", padding: "10px", borderRight: "1px solid #ccc" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #ccc" }}>
           <tbody>
             <tr>
@@ -173,6 +180,7 @@ const Profile = () => {
           </tbody>
         </table>
       </div>
+      )}
       <div style={{ flex: 1, padding: "20px", border: "1px solid #ccc", minHeight: "550px" }}>
         <h1>{activeOption}</h1>
 
@@ -264,11 +272,13 @@ const Profile = () => {
       </button>
     </div>
   </div>
+
 )}
 
         
       </div>
     </div>
+      
     
   );
 };
