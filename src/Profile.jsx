@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [activeOption, setActiveOption] = useState("Your Account");
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const navigate = useNavigate();
 
   const handleOptionClick = (option) => {
-    setActiveOption(option);
+    if (option === "My Cart") {
+      navigate("/MyCart"); // Navigate to the MyCart route
+    } else {
+      setActiveOption(option);
+    }
   };
 
   const handleMouseEnter = (option) => {
