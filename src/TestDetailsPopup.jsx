@@ -27,6 +27,28 @@ const TestDetailsPopup = ({ onClose, pincode }) => {
     setExpandedDescriptionIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const storeSelectedTest = async (testName) => {
+    try {
+      const response = await fetch('http://localhost:8080/selectedtest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          testName,
+          pincode,
+        }),
+      });
+      if (response.ok) {
+        console.log('Test details saved successfully');
+      } else {
+        console.error('Failed to save test details');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   
   const getDescriptionPopup = (test) => (
     <div
@@ -93,71 +115,116 @@ const TestDetailsPopup = ({ onClose, pincode }) => {
   return (
     <div>
       {showLabDetails ? (
-      <LabDetailsPopup onClose={closeLabDetails} pincode={pincode} />
-    ) : (
-       <div>
+        <LabDetailsPopup onClose={closeLabDetails} pincode={pincode} />
+      ) : (
+        <div>
           <div
             className={expandedDescriptionIndex !== null ? 'grid-hidden' : 'grid-visible'}
             style={{
-              position: "fixed", left: "50%", top: "55%", transform: "translate(-50%, -50%)", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", display: "grid", gridTemplateColumns: "repeat(4, minmax(15vw, 1fr))", gap: "20px", padding: "15px", background: "transparent",
+              position: "fixed", 
+              left: "50%", 
+              top: "55%", 
+              transform: "translate(-50%, -50%)", 
+              borderRadius: "10px", 
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", 
+              display: "grid", 
+              gridTemplateColumns: "repeat(4, minmax(15vw, 1fr))", 
+              gap: "20px", 
+              padding: "15px", 
+              background: "transparent",
             }}
           >
-          {testData.map((test, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid #ccc", borderRadius: "8px", width: "13vw", height: "15vw", textAlign: "center", background: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "3px", marginBottom: "20px",
-              }}
-            >
-               <div>
-                <h4>{test.name}</h4>
-                <p>
-                  {`${test.description.slice(0, 15)}...`}
-                  {test.description.length > 15 && (
-                    <span
-                      style={{
-                        color: 'blue',
-                        textDecoration: 'underline',
-                        cursor: 'pointer',
-                        marginLeft: '5px',
-                      }}
-                      onClick={() => setExpandedDescriptionIndex(index)}
-                    >
-                      Show more
-                    </span>
-                  )}
-                </p>
-              </div>
-              <button
-                onClick={() => handleAddToCart(index)}
+            {testData.map((test, index) => (
+              <div
+                key={index}
                 style={{
-                  marginTop: "10px", background: addedToCart[index] ? "green" : "blue", color: "#fff", fontSize: "12px", padding: "5px 10px", borderRadius: "15px",
+                  border: "1px solid #ccc", 
+                  borderRadius: "8px", 
+                  width: "13vw", 
+                  height: "15vw", 
+                  textAlign: "center", 
+                  background: "#fff", 
+                  display: "flex", 
+                  flexDirection: "column", 
+                  justifyContent: "space-between", 
+                  padding: "3px", 
+                  marginBottom: "20px",
                 }}
               >
-                {addedToCart[index] ? "Selected" : "Select Test"}
-              </button>
-            </div>
-          ))}
+                <div>
+                  <h4>{test.name}</h4>
+                  <p>
+                    {`${test.description.slice(0, 15)}...`}
+                    {test.description.length > 15 && (
+                      <span
+                        style={{
+                          color: 'blue',
+                          textDecoration: 'underline',
+                          cursor: 'pointer',
+                          marginLeft: '5px',
+                        }}
+                        onClick={() => toggleDescription(index)}
+                      >
+                        Show more
+                      </span>
+                    )}
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    handleAddToCart(index);
+                    storeSelectedTest(test.name); // Store selected test
+                  }}
+                  style={{
+                    marginTop: "10px", 
+                    background: addedToCart[index] ? "green" : "blue", 
+                    color: "#fff", 
+                    fontSize: "12px", 
+                    padding: "5px 10px", 
+                    borderRadius: "15px",
+                  }}
+                >
+                  {addedToCart[index] ? "Selected" : "Select Test"}
+                </button>
+              </div>
+            ))}
             {expandedDescriptionIndex !== null &&
-            getDescriptionPopup(testData[expandedDescriptionIndex])}
-          <button
-            onClick={openLabDetails}
-            disabled={!isAnyTestSelected}
-            style={{
-              gridColumn: "span 6", marginTop: "-4px", background: "blue", color: "#fff", fontSize: "15px", padding: "8px 10px", width: "120px", justifySelf: "end", borderRadius: "40px",
-            }}
-          >
-            Select Lab
-          </button>
-          <button
-            onClick={onClose}
-            style={{
-              gridColumn: "span 6", marginTop: "-60px", background: "blue", color: "#fff", fontSize: "15px", padding: "8px 10px", width: "120px", justifySelf: "start", borderRadius: "20px", height: "40px"
-            }}
-          >
-            Back
-          </button>
-        </div>
+              getDescriptionPopup(testData[expandedDescriptionIndex])}
+            <button
+              onClick={openLabDetails}
+              disabled={!addedToCart.some((isSelected) => isSelected)}
+              style={{
+                gridColumn: "span 6", 
+                marginTop: "-4px", 
+                background: "blue", 
+                color: "#fff", 
+                fontSize: "15px", 
+                padding: "8px 10px", 
+                width: "120px", 
+                justifySelf: "end", 
+                borderRadius: "40px",
+              }}
+            >
+              Select Lab
+            </button>
+            <button
+              onClick={onClose}
+              style={{
+                gridColumn: "span 6", 
+                marginTop: "-60px", 
+                background: "blue", 
+                color: "#fff", 
+                fontSize: "15px", 
+                padding: "8px 10px", 
+                width: "120px", 
+                justifySelf: "start", 
+                borderRadius: "20px", 
+                height: "40px"
+              }}
+            >
+              Back
+            </button>
+          </div>
         </div>
       )}
     </div>

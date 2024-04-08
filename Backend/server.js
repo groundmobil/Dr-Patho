@@ -6,6 +6,7 @@ const reviewsRoutes = require('./Reviewsdb');
 const loginRoutes = require('./logindb');
 const BookNowdb = require('./BookNowdb');
 const Slotdb = require('./Slotdb');
+const TestDetails = require('./detailsdb');
 
 // Initialize Express app
 const server = express();
@@ -75,6 +76,31 @@ server.post('/slot', async (req, res) => {
   await Slotdb.saveSlotData(address, date, timeSlot);
 
   res.status(200).json({ message: 'Slot data saved successfully' });
+});
+
+// Route to handle storing selected test details
+server.post('/selectedtest', async (req, res) => {
+  const { testName, pincode } = req.body;
+
+  if (!testName || !pincode) {
+    return res.status(400).json({ error: 'Test name and pincode are required' });
+  }
+
+  try {
+    // Create a new test details document
+    const testDetails = new TestDetails({
+      testName,
+      pincode,
+    });
+
+    // Save the test details to the database
+    await testDetails.save();
+
+    res.status(200).json({ message: 'Test details saved successfully' });
+  } catch (error) {
+    console.error('Error saving test details:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // Set up server to listen on specified port
