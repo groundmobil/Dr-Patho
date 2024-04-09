@@ -99,6 +99,22 @@ const Profile = () => {
             </tr>
             <tr>
               <td
+                id="My Orders"
+                onClick={() => handleOptionClick("My Orders")}
+                onMouseEnter={() => handleMouseEnter("My Orders")}
+                onMouseLeave={() => handleMouseLeave("My Orders")}
+                style={{
+                  cursor: "pointer",
+                  color: activeOption === "My Orders" ? "black" : "black",
+                  borderBottom: "1px solid #ccc",
+                  padding: "10px",
+                }}
+              >
+               My Orders
+              </td>
+            </tr>
+            <tr>
+              <td
                 id="Coupons"
                 onClick={() => handleOptionClick("Coupons")}
                 onMouseEnter={() => handleMouseEnter("Coupons")}
