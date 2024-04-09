@@ -117,6 +117,12 @@ const MyCart = () => {
             margin-top: 10px;
           }
 
+          .button-container1 {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 174px;
+          }
+
           .button {
             background-color: blue;
             color: white;
@@ -217,6 +223,11 @@ const MyCart = () => {
             </div>
             <div className="row">
               <h3>Lab Details :</h3>
+              <div className="lab-details">
+                <p>Lab Name: </p>
+                <p>Price: </p>
+                <p>Location:</p>
+              </div>
               <div className="button-container">
                 <button className="button" onClick={handleChangeLab} style={{ marginLeft: "600px" }}>
                   Change Lab
@@ -239,7 +250,10 @@ const MyCart = () => {
           </div>
           <div className="pricing-section">
             <h3>Pricing Details</h3>
-            <div className="button-container">
+            <p>Total MRP: </p>
+                <p>Discount: </p>
+                <p>Final Price:</p>
+            <div className="button-container1">
               <button className="button" onClick={handleCheckout}>
                 Checkout
               </button>
