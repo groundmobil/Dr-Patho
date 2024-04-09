@@ -335,7 +335,26 @@ const Checkout = () => {
       cursor: pointer;
       text-decoration: none; /* Remove hyperlink styling */
     }
+      
+    .order-summary {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
 
+    .columns {
+      display: flex;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    .column p {
+      margin: 30px 0; /* Adjust the vertical margin here */
+    }
               
         `}
       </style>
@@ -525,11 +544,18 @@ const Checkout = () => {
   <div>
     <div className="step-title" style={{ textAlign: 'center', margin: 'auto' }}>
       <h3>Order Summary</h3>
-      <p>Test: </p>
-      <p>Lab: </p>
+      <div className="columns">
+    <div className="column">
+      <p>Patient Name: </p>
       <p>Address: </p>
       <p>Slot: </p>
+    </div>
+    <div className="column">
+      <p>Test: </p>
+      <p>Lab: </p>
       <p>Total Price: </p>
+    </div>
+    </div>
     </div>
     <button
       className="previous-button"
