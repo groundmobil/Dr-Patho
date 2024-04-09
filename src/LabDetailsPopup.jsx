@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LabDetailsPopup = ({ onClose, pincode }) => {
   const navigate = useNavigate();
-  const [isAddedToCartArray, setIsAddedToCartArray] = useState(new Array(5).fill(false));
-  const [selectedLabs, setSelectedLabs] = useState([]);
+  const [selectedLab, setSelectedLab] = useState(null); // State to store the selected lab
 
-  const handleAddToCartClick = (index) => {
-    const updatedArray = [...isAddedToCartArray];
-    updatedArray[index] = !updatedArray[index];
-    setIsAddedToCartArray(updatedArray);
-
-    if (!isAddedToCartArray[index]) {
-      setSelectedLabs((prevSelectedLabs) => [...prevSelectedLabs, index]);
-    } else {
-      setSelectedLabs((prevSelectedLabs) =>
-        prevSelectedLabs.filter((selectedLab) => selectedLab !== index)
-      );
+  const handleAddToCartClick = async (labName) => {
+    try {
+      // Send a POST request to the backend to save the selected lab name
+      await axios.post('http://localhost:8080/labdetails', { name: labName });
+      console.log('Lab selected and saved:', labName);
+      setSelectedLab(labName); // Update the selectedLab state
+    } catch (error) {
+      console.error('Error selecting lab:', error);
     }
   };
 
@@ -41,11 +38,9 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
     return null; // Return null when rating is not available
   };
 
-  const isCheckoutEnabled = selectedLabs.length > 0;
-
   const handleCheckoutClick = () => {
-    if (isCheckoutEnabled) {
-      console.log('Checkout clicked with selected labs:', selectedLabs);
+    if (selectedLab) {
+      console.log('Checkout clicked with selected lab:', selectedLab);
       // Implement your checkout logic here
       navigate('/MyCart'); // Navigate to "MyCart" on checkout
     }
@@ -95,19 +90,18 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
                   <td style={{ border: '1px solid #fff', padding: '18px' }}>{lab.name}</td>
                   <td style={{ border: '1px solid #fff', padding: '18px' }}>{lab.price}</td>
                   <td style={{ border: '1px solid #fff', padding: '18px' }}>{lab.address}</td>
-                  <td style={{ border: '1px solid #fff', padding: '18px' }}>
-                    {lab.rating} {renderStars(lab.rating)}
-                  </td>
+                  <td style={{ border: '1px solid #fff', padding: '18px' }}>{lab.rating}</td>
                   <td style={{ border: '1px solid #fff', padding: '18px' }}>
                     <button
-                      onClick={() => handleAddToCartClick(index)}
-                      style={{
-                        background: isAddedToCartArray[index] ? '#28a745' : 'blue',
-                        color: '#fff',
+                      onClick={() => handleAddToCartClick(lab.name)}
+                      disabled={selectedLab === lab.name} // Disable button if lab is already selected
+                      style={{ 
+                        background: selectedLab === lab.name ? '#28a745' : 'blue', 
+                        color: '#fff', 
                         borderRadius: '20px',
                       }}
                     >
-                      {isAddedToCartArray[index] ? 'Added' : 'Add to Cart'}
+                      {selectedLab === lab.name ? 'Added' : 'Add to Cart'}
                     </button>
                   </td>
                 </tr>
@@ -130,9 +124,9 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
           </button>
           <button
             onClick={handleCheckoutClick}
-            disabled={!isCheckoutEnabled}
+            disabled={!selectedLab} // Disable checkout button if no lab is selected
             style={{
-              background: isCheckoutEnabled ? 'blue' : '#ccc',
+              background: selectedLab ? 'blue' : '#ccc',
               color: '#fff',
               fontSize: '15px',
               padding: '8px 10px',
@@ -150,6 +144,7 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
 
 LabDetailsPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
+  pincode: PropTypes.string.isRequired,
 };
 
 export default LabDetailsPopup;

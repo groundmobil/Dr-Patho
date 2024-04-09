@@ -7,6 +7,7 @@ const loginRoutes = require('./logindb');
 const BookNowdb = require('./BookNowdb');
 const Slotdb = require('./Slotdb');
 const TestDetails = require('./detailsdb');
+const LabDetails = require('./LabDetailsdb');
 
 // Initialize Express app
 const server = express();
@@ -99,6 +100,30 @@ server.post('/selectedtest', async (req, res) => {
     res.status(200).json({ message: 'Test details saved successfully' });
   } catch (error) {
     console.error('Error saving test details:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update the endpoint to handle storing lab details
+server.post('/labdetails', async (req, res) => {
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: 'Lab name is required' });
+  }
+
+  try {
+    // Create a new LabDetails document
+    const labDetails = new LabDetails({
+      name,
+    });
+
+    // Save the lab details to the database
+    await labDetails.save();
+
+    res.status(200).json({ message: 'Lab details saved successfully' });
+  } catch (error) {
+    console.error('Error saving lab details:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
