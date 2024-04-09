@@ -525,8 +525,10 @@ const Checkout = () => {
   <div>
     <div className="step-title" style={{ textAlign: 'center', margin: 'auto' }}>
       <h3>Order Summary</h3>
-      <p>MRP: </p>
-      <p>Total Discount: </p>
+      <p>Test: </p>
+      <p>Lab: </p>
+      <p>Address: </p>
+      <p>Slot: </p>
       <p>Total Price: </p>
     </div>
     <button
