@@ -1,9 +1,12 @@
+//server.js 
 // Import required libraries
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const reviewsRoutes = require('./Reviewsdb');
-const loginRoutes = require('./logindb');
+const contactRoutes = require('./contactRoutes'); // Import contact routes
+const personalInfoRoutes = require('./personalInfoRoutes'); // Import personal info routes
+const addressRoutes = require('./addressRoutes'); // Import address routes
 const BookNowdb = require('./BookNowdb');
 const Slotdb = require('./Slotdb');
 const TestDetails = require('./detailsdb');
@@ -34,8 +37,14 @@ server.get('/', (req, res) => {
   res.send('Hi Backend!');
 });
 
-// Mount login routes
-server.use('/', loginRoutes);
+// Mount contact routes
+server.use('/', contactRoutes);
+
+// Mount personal info routes
+server.use('/', personalInfoRoutes);
+
+// Mount address routes
+server.use('/', addressRoutes);
 
 // Update the endpoint to handle storing BookNow data
 server.post('/booknow', async (req, res) => {

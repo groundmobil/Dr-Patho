@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { MdOutlineMyLocation } from "react-icons/md";
 
-const LocationPopup = ({ onAddressSubmit, onClose }) => {
+const LocationPopup = ({ phoneNumber, onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -49,13 +49,13 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
     event.preventDefault();
 
     // Validate if all input fields are filled
-    if (!pinCode || !address || !city || !state) {
+    if (!pinCode || !address || !city || !state || !phoneNumber) {
       alert("Please fill in all address details.");
       return;
     }
 
 
-    onAddressSubmit({ pinCode, address, city, state });
+    onAddressSubmit({ pinCode, address, city, state, phoneNumber });
     setPinCode("");
     setAddress("");
     setCity("");
@@ -151,7 +151,7 @@ const LocationPopup = ({ onAddressSubmit, onClose }) => {
   );
 };
 
-const PersonalInfo = ({ onSubmit, onClose }) => {
+const PersonalInfo = ({ phoneNumber, onSubmit, onClose }) => {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [dob, setDob] = useState("");
@@ -165,7 +165,8 @@ const PersonalInfo = ({ onSubmit, onClose }) => {
       return;
     }
 
-    onSubmit({ Name, Email, dob, gender });
+    onSubmit({ Name, Email, dob, gender, phoneNumber });
+
     setName("");
     setEmail("");
     setDob("");
@@ -304,8 +305,8 @@ const App = () => {
         email: personalInfo.Email,
         dob: personalInfo.dob,
         gender: personalInfo.gender,
+        phoneNumber: personalInfo.phoneNumber, // Make sure phoneNumber is correctly accessed
       });
-  
       if (response.data.message === 'Personal info saved successfully') {
         setShowPersonalInfo(false);
         setShowAddressPopup(true);
@@ -318,6 +319,7 @@ const App = () => {
     }
   };
   
+  
   const handleAddressSubmit = async (address) => {
     try {
       const response = await axios.post('http://localhost:8080/api/address', {
@@ -325,13 +327,16 @@ const App = () => {
       address: address.address,
       city: address.city,
       state: address.state,
+      phoneNumber: address.phoneNumber,
     });
   
-      if (response.data.message === 'Address saved successfully') {
-        setShowAddressPopup(false);
-      } else {
-        alert("Failed to save address info");
-      }
+    if (response.data.message === 'Address saved successfully') {
+      setShowAddressPopup(false);
+      // Send success message
+      alert("Successfully logged in");
+    } else {
+      alert("Failed to save address info");
+    }
     } catch (error) {
       console.error("Error while making POST request:", error);
       alert("Failed to save address info");
@@ -551,17 +556,19 @@ const App = () => {
 
         {showPersonalInfo && (
           <PersonalInfo
-            onSubmit={handlePersonalInfoSubmit}
-            onClose={() => setShowPersonalInfo(false)}
-          />
+          phoneNumber={phoneNumber}
+          onSubmit={handlePersonalInfoSubmit}
+          onClose={() => setShowPersonalInfo(false)}
+        />
         )}
 
-        {showAddressPopup && (
-          <LocationPopup
-            onAddressSubmit={handleAddressSubmit}
-            onClose={() => setShowAddressPopup(false)}
-          />
-        )}
+{showAddressPopup && (
+  <LocationPopup
+    phoneNumber={phoneNumber} // Make sure phoneNumber is passed here
+    onAddressSubmit={handleAddressSubmit}
+    onClose={() => setShowAddressPopup(false)}
+  />
+)}
       </div>
     </div>
   );
