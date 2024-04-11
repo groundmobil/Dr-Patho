@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { MdOutlineMyLocation } from "react-icons/md";
 
+
 const LocationPopup = ({ phoneNumber, onAddressSubmit, onClose }) => {
   const [pinCode, setPinCode] = useState("");
   const [address, setAddress] = useState("");
@@ -266,6 +267,7 @@ const App = () => {
   const [showAddressPopup, setShowAddressPopup] = useState(false);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
+  const navigate = useNavigate();
   
   const handlePhoneNumber = (event) => {
     setPhoneNumber(event.target.value);
@@ -333,7 +335,7 @@ const App = () => {
     if (response.data.message === 'Address saved successfully') {
       setShowAddressPopup(false);
       // Send success message
-      alert("Successfully logged in");
+      alert("Successfully Signed in");
     } else {
       alert("Failed to save address info");
     }
@@ -410,7 +412,7 @@ const App = () => {
 
   return (
     <div className="App" style={{ color: "white", textAlign: "center", marginTop: "-62px" }}>
-      <h1>Login With Your Mobile Number and OTP</h1>
+      <h1>Sign Up With Your Mobile Number and OTP</h1>
       <div>
         <h3>Mobile Number:</h3>
         {!showOtpInput ? (
@@ -551,7 +553,9 @@ const App = () => {
           <br />
           <br/>
           <br/>
-          
+          <p style={{ marginTop: "10px" }}>
+          Already have an account? <span style={{cursor: "pointer", color: "blue"}} onClick={() => navigate('/SignIn')}>Login</span>
+        </p>
         </form>
 
         {showPersonalInfo && (
