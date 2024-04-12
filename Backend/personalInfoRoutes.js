@@ -22,4 +22,20 @@ router.post('/api/personal-info', async (req, res) => {
     }
   });
 
+// Route to check if phone number exists
+router.post('/api/check-phone-number', async (req, res) => {
+  try {
+    const { phoneNumber } = req.body;
+
+    // Query the database to check if the phone number exists
+    const personalInfo = await PersonalInfoModel.findOne({ phoneNumber });
+
+    res.status(200).json({ exists: !!personalInfo }); // Send whether the phone number exists or not
+  } catch (error) {
+    console.error("Error while checking phone number:", error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;
