@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [otpSent, setOtpSent] = useState(false); // State to track if OTP is sent
-  const [otpSubmitted, setOtpSubmitted] = useState(false); // State to track if OTP is submitted
+  const [otpSent, setOtpSent] = useState(false); 
+  const [otpSubmitted, setOtpSubmitted] = useState(false); 
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const navigate = useNavigate();
   const inputRefs = useRef([]);
@@ -17,18 +17,17 @@ const SignIn = () => {
 
   const handleSendOTP = async () => {
     try {
-      // Make a POST request to check if phone number exists
+      
       const response = await axios.post('http://localhost:8080/api/check-phone-number', {
         phoneNumber: phoneNumber
       });
 
       if (response.data.exists) {
-        // If phone number exists, proceed with sending OTP
-        // You can handle OTP sending logic here
+        
         alert("OTP sent successfully");
-        setOtpSent(true); // Update state to indicate OTP is sent
+        setOtpSent(true); 
       } else {
-        // If phone number doesn't exist, show error message
+        
         setIsPhoneNumberValid(false);
       }
     } catch (error) {
@@ -40,11 +39,11 @@ const SignIn = () => {
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
     
-    // Directly redirect assuming all OTPs are correct
+   
     navigate('/BookNow');
-    setOtpSubmitted(true); // Update state to indicate OTP is submitted
+    setOtpSubmitted(true); 
 
-    // Log success message to console
+    
     console.log("Successfully logged in!");
   };
 
@@ -118,7 +117,7 @@ const SignIn = () => {
           SEND OTP
         </button>
         {!isPhoneNumberValid && <p style={{ color: 'red' }}>Phone number does not exist. Please enter a valid phone number.</p>}
-        {otpSent && ( // Only render OTP input fields if OTP is sent
+        {otpSent && ( 
           <>
             <h3>Enter OTP:</h3>
             <div>
@@ -136,7 +135,7 @@ const SignIn = () => {
                 />
               ))}
             </div>
-            {otp.length === 6 && ( // Only render submit button if all OTP input fields are filled
+            {otp.length === 6 && ( 
               <button
                 style={{
                   padding: "15px 20px",

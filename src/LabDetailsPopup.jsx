@@ -5,14 +5,14 @@ import axios from 'axios';
 
 const LabDetailsPopup = ({ onClose, pincode }) => {
   const navigate = useNavigate();
-  const [selectedLab, setSelectedLab] = useState(null); // State to store the selected lab
+  const [selectedLab, setSelectedLab] = useState(null); 
 
   const handleAddToCartClick = async (labName) => {
     try {
-      // Send a POST request to the backend to save the selected lab name
+     
       await axios.post('http://localhost:8080/labdetails', { name: labName });
       console.log('Lab selected and saved:', labName);
-      setSelectedLab(labName); // Update the selectedLab state
+      setSelectedLab(labName);
     } catch (error) {
       console.error('Error selecting lab:', error);
     }
@@ -35,18 +35,18 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
       return stars;
     }
   
-    return null; // Return null when rating is not available
+    return null;
   };
 
   const handleCheckoutClick = () => {
     if (selectedLab) {
       console.log('Checkout clicked with selected lab:', selectedLab);
-      // Implement your checkout logic here
-      navigate('/MyCart'); // Navigate to "MyCart" on checkout
+      
+      navigate('/MyCart'); 
     }
   };
 
-  // Manually input lab details here
+  
   const labsForPincode444606 = [
     { name: 'Suburban Diagnostics', price: 200, address: 'Lifecare Laboratories, Rukmani Nagar, Opp. Atul Mangal Hall', rating: 2.7},
     { name: 'Dr.Lal path labs', price: 250, address: 'VMV Road Near Shegaon Naka Malviya complex, Rathi Nagar', rating: 5 },
@@ -94,7 +94,7 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
                   <td style={{ border: '1px solid #fff', padding: '18px' }}>
                     <button
                       onClick={() => handleAddToCartClick(lab.name)}
-                      disabled={selectedLab === lab.name} // Disable button if lab is already selected
+                      disabled={selectedLab === lab.name}
                       style={{ 
                         background: selectedLab === lab.name ? '#28a745' : 'blue', 
                         color: '#fff', 
@@ -124,7 +124,7 @@ const LabDetailsPopup = ({ onClose, pincode }) => {
           </button>
           <button
             onClick={handleCheckoutClick}
-            disabled={!selectedLab} // Disable checkout button if no lab is selected
+            disabled={!selectedLab} 
             style={{
               background: selectedLab ? 'blue' : '#ccc',
               color: '#fff',

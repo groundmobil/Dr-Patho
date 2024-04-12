@@ -18,7 +18,7 @@ const LocationPopup = ({ phoneNumber, onAddressSubmit, onClose }) => {
         async (position) => {
           const { latitude, longitude } = position.coords;
           try {
-            // Fetch address details using reverse geocoding service
+         
             const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
             if (response.data.address) {
               setAddress(response.data.display_name);
@@ -49,7 +49,7 @@ const LocationPopup = ({ phoneNumber, onAddressSubmit, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validate if all input fields are filled
+   
     if (!pinCode || !address || !city || !state || !phoneNumber) {
       alert("Please fill in all address details.");
       return;
@@ -283,13 +283,13 @@ const App = () => {
     }
   
     try {
-      // Make a POST request to your backend endpoint
+    
       const response = await axios.post('http://localhost:8080/api/contact', {
         phoneNumber: phoneNumber,
       });
 
   
-      // Assuming your backend responds with a success message
+    
       if (response.data.message === 'Contact info saved successfully') {
         setShowOtpInput(true);
       } else {
@@ -307,7 +307,7 @@ const App = () => {
         email: personalInfo.Email,
         dob: personalInfo.dob,
         gender: personalInfo.gender,
-        phoneNumber: personalInfo.phoneNumber, // Make sure phoneNumber is correctly accessed
+        phoneNumber: personalInfo.phoneNumber,
       });
       if (response.data.message === 'Personal info saved successfully') {
         setShowPersonalInfo(false);
@@ -334,7 +334,7 @@ const App = () => {
   
     if (response.data.message === 'Address saved successfully') {
       setShowAddressPopup(false);
-      // Send success message
+      
       alert("Successfully Signed in");
     } else {
       alert("Failed to save address info");
@@ -568,7 +568,7 @@ const App = () => {
 
 {showAddressPopup && (
   <LocationPopup
-    phoneNumber={phoneNumber} // Make sure phoneNumber is passed here
+    phoneNumber={phoneNumber} 
     onAddressSubmit={handleAddressSubmit}
     onClose={() => setShowAddressPopup(false)}
   />

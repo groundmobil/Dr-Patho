@@ -113,7 +113,7 @@ const MobileNavLinkStyled = styled(NavLink)`
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user authentication status
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);

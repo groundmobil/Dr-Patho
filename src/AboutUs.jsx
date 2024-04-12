@@ -74,13 +74,13 @@ const AboutUs = () => {
     };
   }, []);
 
-  const fadeInThreshold = 100; // Adjust this threshold as needed
+  const fadeInThreshold = 100; 
 
   const opacity = Math.min(1, Math.max(0, (scrollY - fadeInThreshold) / (200 - fadeInThreshold)));
 
   const slidingContainerStyle = {
     transform: `translateY(${Math.max(0, Math.min(200 - scrollY, 200))}px)`,
-    transition: 'transform 1s ease-in-out', // Added transition for sliding
+    transition: 'transform 1s ease-in-out', 
   };
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -123,7 +123,7 @@ const AboutUs = () => {
                   ...iconStyle,
                   ...(hoveredIndex === index ? { transform: 'scale(1.1)' } : {}),
                   opacity,
-                  transition: 'transform 0.5s ease-in-out, opacity 2s ease-in-out', // Added transition for scaling
+                  transition: 'transform 0.5s ease-in-out, opacity 2s ease-in-out',
                 }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}

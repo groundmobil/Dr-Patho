@@ -44,7 +44,7 @@ const Header = () => {
                     <DrPatho>Dr.Patho</DrPatho>
                 </DrPathoContainer>
                 <Navbar />
-                {/* Hamburger icon removed completely */}
+               
             </MainHeader>
         </HeaderContainer>
     );

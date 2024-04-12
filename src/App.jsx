@@ -37,7 +37,7 @@ const App = () => {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/Images/dr.png)`,
           backgroundSize: 'cover',
-          minHeight: '100vh', // Change height to minHeight for full screen background
+          minHeight: '100vh',
         }}
       >
         <BrowserRouter>

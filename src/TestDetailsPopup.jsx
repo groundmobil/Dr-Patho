@@ -96,7 +96,7 @@ const TestDetailsPopup = ({ onClose, pincode }) => {
 
   const isAnyTestSelected = addedToCart.some((isSelected) => isSelected);
 
-  // Test data for each grid square
+ 
   const testData = [
     { name: 'HBA1c', description: 'This is a blood test which shows a 3 months average sugar level in blood. Heamoglobin A1c is a type of protein in red blood cell that is resposible for exchange of gases, oxygen to the cell and brings back carbon dioxide. When sugar builds in the blood it binds to Heamoglobin. This test determines how much sugar is bound to RBC. Since RBC lives for 3 months it shows a 3 months average. This test helps ypur doctor understand the effectiveness of the sugar control regime he/she has prescribed and adjust (if required) accordingly.' },
     { name: 'Complete Blood Count- EDTA Blood', description: 'Description for Test 2' },
@@ -173,7 +173,7 @@ const TestDetailsPopup = ({ onClose, pincode }) => {
                 <button
                   onClick={() => {
                     handleAddToCart(index);
-                    storeSelectedTest(test.name); // Store selected test
+                    storeSelectedTest(test.name); 
                   }}
                   style={{
                     marginTop: "10px", 

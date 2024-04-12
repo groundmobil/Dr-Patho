@@ -9,7 +9,7 @@ const Checkout = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null); 
   const [showModal, setShowModal] = useState(false);
-  const [address, setAddress] = useState('Your Address'); // State to hold the address
+  const [address, setAddress] = useState('Your Address');
   const [originalAddress, setOriginalAddress] = useState('');
   const [selectedTime, setSelectedTime] = useState("");
 
@@ -44,19 +44,19 @@ const Checkout = () => {
   };
 
   const handleOpenModal = () => {
-    // Store the current address as the original address
+   
     setOriginalAddress(address);
     
-    // Open the modal
+    
     setShowModal(true);
   };
   
   const handleCancelAddressChange = () => {
-    // Reset the address in case any changes were made
-    setAddress(originalAddress); // Assuming you have stored the original address in state
     
-    // Close the modal
-    setShowModal(false); // Set showModal to false to close the modal
+    setAddress(originalAddress); 
+    
+    
+    setShowModal(false); 
   };
   
   const handleDateChange = (event) => {
@@ -83,7 +83,7 @@ const Checkout = () => {
   
       if (response.data.message === 'Slot data saved successfully') {
         window.alert('Slot saved successfully!');
-        // Redirect to Payment page after successful slot save
+        
         navigate('/Purchase');
       } else {
         window.alert('Failed to save slot');
@@ -414,7 +414,7 @@ const Checkout = () => {
           columns="60"
           placeholder="Change address here"
           className="curved-textbox"
-          onChange={(e) => setAddress(e.target.value)} // Update address state on change
+          onChange={(e) => setAddress(e.target.value)} 
           style={{resize:'none'}}
         />
       </div>
@@ -424,7 +424,7 @@ const Checkout = () => {
         </button>
         <button
           className="transparent-button change-button"
-          onClick={() => handleChangeAddress(address)} // Pass the new address to handleChangeAddress
+          onClick={() => handleChangeAddress(address)} 
         >
           Change
         </button>

@@ -2,43 +2,43 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MyCart = () => {
-  const [showPatientModal, setShowPatientModal] = useState(false); // State to control the visibility of the patient details modal
-  const [patientName, setPatientName] = useState(""); // State to hold patient name
-  const [dateOfBirth, setDateOfBirth] = useState(""); // State to hold date of birth
-  const [gender, setGender] = useState(""); // State to hold gender
+  const [showPatientModal, setShowPatientModal] = useState(false); 
+  const [patientName, setPatientName] = useState(""); 
+  const [dateOfBirth, setDateOfBirth] = useState(""); 
+  const [gender, setGender] = useState(""); 
   const navigate = useNavigate();
   
   const handleAddTests = () => {
     console.log("Adding more tests");
-    // Add your logic here
+    
     navigate("/TestDetailsPopup");
   };
 
   const handleChangeLab = () => {
     console.log("Changing lab");
-    // Add your logic here
+   
     navigate("/LabDetailsPopup");
   };
 
   const handleAddPatientDetails = () => {
-    setShowPatientModal(true); // Show the patient details modal
+    setShowPatientModal(true); 
   };
 
   const handleCloseModal = () => {
-    setShowPatientModal(false); // Close the patient details modal
+    setShowPatientModal(false); 
   };
 
   const handleCheckout = () => {
     console.log("Checking out");
-    // Add your logic here
+    
     navigate("/Checkout");
   };
 
   const handlePatientDetailsSubmit = (event) => {
     event.preventDefault();
-    // Add logic to handle the submitted patient details
+   
     console.log("Patient details submitted");
-    // Close the modal after submitting details
+   
     setShowPatientModal(false);
   };
 
@@ -261,7 +261,7 @@ const MyCart = () => {
           </div>
         </div>
 
-        {/* Patient Details Modal */}
+        
         {showPatientModal && (
           <div className="modal">
             <div className="modal-content">
@@ -276,7 +276,7 @@ const MyCart = () => {
                     type="text"
                     value={patientName}
                     onChange={(e) => setPatientName(e.target.value)}
-                    className="input-field" // Add class for styling
+                    className="input-field"
                   />
                 </label>
                 <label>
@@ -285,7 +285,7 @@ const MyCart = () => {
                     type="text"
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
-                    className="input-field" // Add class for styling
+                    className="input-field"
                   />
                 </label>
                 <label>
@@ -294,7 +294,7 @@ const MyCart = () => {
                     type="text"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="input-field" // Add class for styling
+                    className="input-field" 
                   />
                 </label>
                 <button type="submit" className="button">

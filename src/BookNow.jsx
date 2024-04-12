@@ -24,7 +24,7 @@ const BookNow = () => {
       const formData = new FormData();
       formData.append('file', selectedFile);
   
-      // Make a separate API call to handle file upload
+     
       const fileUploadResponse = await fetch('http://localhost:8080/upload', {
         method: 'POST',
         body: formData,
@@ -46,7 +46,6 @@ const BookNow = () => {
           console.log("Pin Code:", pincode);
           console.log("Selected Test:", selectedTest);
   
-          // Make an API call to store data in the database
           await fetch('http://localhost:8080/booknow', {
             method: 'POST',
             headers: {
@@ -56,14 +55,14 @@ const BookNow = () => {
           });
   
         } else {
-          // Display a message if the entered test is not "diabetes"
+         
           alert('This test is not availabe currently.');
         }
       } else if (!allowedPincodes.includes(pincode) && selectedTest.toLowerCase() === 'diabetes') {
-        // Display a message if the entered pin code is not allowed
+        
         alert('We work only at pin codes 411017 and 444606.');
       } else {
-        // Display a message if both pin code and test are not allowed
+       
         alert('We work only at pin codes 411017 and 444606 and currently, this test is not availabe.');
       }
     } catch (error) {
@@ -239,7 +238,7 @@ const BookNow = () => {
         backgroundColor: "#007BFF",
         color: "white",
         borderRadius: "70px",
-        cursor: isSearchEnabled ? "pointer" : "not-allowed", // Change cursor style
+        cursor: isSearchEnabled ? "pointer" : "not-allowed", 
         marginTop: "20px",
       }}
     >
@@ -280,7 +279,7 @@ const BookNow = () => {
 export default BookNow;
 
 
-// CSS
+
 const styles = `
 @media (min-width: 768px) {
   .mobile-layout {
@@ -309,7 +308,7 @@ const styles = `
 }
 `;
 
-// Add styles to the head of the document
+
 const styleSheet = new CSSStyleSheet();
 styleSheet.replaceSync(styles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];

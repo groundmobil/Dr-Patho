@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const [activeOption, setActiveOption] = useState("Your Account");
+  const [activeOption, setActiveOption] = useState("My Account");
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const navigate = useNavigate();
@@ -192,7 +192,7 @@ const Profile = () => {
                 Logout
               </td>
             </tr>
-            {/* Add more menu options as needed */}
+            
           </tbody>
         </table>
       </div>
@@ -246,21 +246,7 @@ const Profile = () => {
     <h3>Phone Number:</h3>
     <h3>Email ID:</h3>
     <h3>Address:</h3>
-    <button 
-      style={{ 
-        padding: "10px 20px", 
-        fontSize: "16px", 
-        backgroundColor: "black", 
-        color: "white", 
-        borderRadius: "5px", 
-        border: "none", 
-        cursor: "pointer",
-        marginTop: "20px"
-      }}
-      onClick={() => handleOptionClick("Edit")}
-    >
-      Edit
-    </button>
+   
   </div>
 )}
 

@@ -21,28 +21,28 @@ const Payment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle payment based on selected method
+   
     switch (paymentMethod) {
       case 'creditCard':
-        // Handle credit card payment
+        
         console.log('Credit Card Payment:', formData.creditCardNumber, formData.expirationDate, formData.cvv);
         break;
       case 'paypal':
-        // Handle PayPal payment
+        
         console.log('PayPal Payment:', formData.paypalEmail);
         break;
       case 'UPI':
-        // Handle UPI payment
+       
         console.log('UPI Payment:', formData.upiMethod, formData.UPIID);
         break;
       case 'COD':
-        // Handle Cash on Delivery
+        
         console.log('Cash on Delivery');
         break;
       default:
         console.log('Unknown Payment Method');
     }
-    // You can replace console.log with actual payment service calls
+  
     alert('Payment successful!');
   };
 
