@@ -11,11 +11,11 @@ const Profile = () => {
 
   const handleOptionClick = (option) => {
     if (option === "My Cart") {
-      navigate("/MyCart"); // Navigate to the MyCart route
+      navigate("/MyCart"); 
     } else if (option === "Logout") {
-      // Handle logout
+      
       setIsLoggedIn(false);
-      // Redirect to login page or any other desired action
+      
       navigate("/");
     } else {
       setActiveOption(option);
@@ -52,10 +52,10 @@ const Profile = () => {
       });
   
       console.log("Review submitted successfully");
-      // Add any additional logic you need after submitting the review
+     
     } catch (error) {
       console.error("Error submitting review:", error.message);
-      // Handle the error appropriately
+      
     }
   };
   
@@ -216,7 +216,7 @@ const Profile = () => {
               We do not share your personal information with third parties except as described
               in this Privacy Policy.
             </p>
-            {/* Add more sections as needed for your privacy policy */}
+          
           </div>
         )}
 
@@ -275,7 +275,7 @@ const Profile = () => {
         textAlign: "center",
         display: "block",
         margin: "auto",
-        resize: "none", // Prevents resizing
+        resize: "none", 
       }}
       placeholder="Write your review here..."
       value={review}
