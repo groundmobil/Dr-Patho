@@ -38,13 +38,8 @@ const SignIn = () => {
 
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
-    
-   
-    navigate('/BookNow');
-    setOtpSubmitted(true); 
-
-    
-    console.log("Successfully logged in!");
+    // Other code...
+    navigate('/Profile', { state: { phoneNumber: phoneNumber } }); // Pass phone number to Profile component
   };
 
   const handleChange = (index, e) => {
@@ -76,6 +71,23 @@ const SignIn = () => {
       inputRefs.current[index - 1]
     ) {
       inputRefs.current[index - 1].focus();
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/check-phone-number', {
+        phoneNumber: phoneNumber
+      });
+
+      if (response.data.exists) {
+        navigate('/Profile', { state: { phoneNumber: phoneNumber } }); // Pass phone number to Profile component
+      } else {
+        alert("Phone number does not exist. Please enter a valid phone number.");
+      }
+    } catch (error) {
+      console.error("Error while checking phone number:", error);
+      alert("Failed to check phone number");
     }
   };
 

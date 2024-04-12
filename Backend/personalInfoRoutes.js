@@ -37,5 +37,24 @@ router.post('/api/check-phone-number', async (req, res) => {
   }
 });
 
+// Route to get user data based on phone number
+router.post('/api/get-user-data', async (req, res) => {
+  try {
+    const { phoneNumber } = req.body;
+
+    // Query the database to get user data based on the phone number
+    const userData = await PersonalInfoModel.findOne({ phoneNumber });
+
+    if (userData) {
+      res.status(200).json(userData);
+    } else {
+      res.status(404).json({ message: 'User data not found' });
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;

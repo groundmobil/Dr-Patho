@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
   const [activeOption, setActiveOption] = useState("My Account");
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const [userData, setUserData] = useState(null);
+  const phoneNumber = location.state?.phoneNumber;
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  
+  useEffect(() => {
+    console.log("Phone number:", phoneNumber);
+    if (phoneNumber) {
+      fetchUserData();
+    }
+  }, [phoneNumber]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/get-user-data", {
+        phoneNumber: phoneNumber,
+      });
+  
+      console.log("User data response:", response.data);
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const handleOptionClick = (option) => {
     if (option === "My Cart") {
@@ -238,18 +262,23 @@ const Profile = () => {
           </div>
         )}
 
-{activeOption === "My Account" && (
-  <div style={{ border: "2px solid black", padding: "20px", borderRadius: "10px",}}>
-    <h3>Name:</h3>
-    <h3>Date of Birth:</h3>
-    <h3>Gender:</h3>
-    <h3>Phone Number:</h3>
-    <h3>Email ID:</h3>
-    <h3>Address:</h3>
-   
-  </div>
-)}
-
+    <div>
+      {userData ? (
+        <div>
+         
+          <div>
+          <h3>Name: {userData.name}</h3>
+        <h3>Email: {userData.email}</h3>
+        <h3>Phone Number: {userData.phoneNumber}</h3> {/* Display phone number */}
+        <h3>Gender: {userData.gender}</h3> {/* Display gender */}
+        <h3>DOB: {userData.dob}</h3> 
+            {/* Display other user data fields */}
+          </div>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
 {activeOption === "Rate Us" && (
   <div>
     <div>
