@@ -20,7 +20,7 @@ server.use(cors());
 server.use(express.json());
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://Stuti:Dr.PathoDBLogin@cluster0.zhkvyeb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://viancehealthcare:8ZSWE9gqSuY9DG6h@cluster0.evnvkcx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
